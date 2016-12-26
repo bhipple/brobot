@@ -14,7 +14,7 @@ fbchan = "#the"
 
 def sendMsg(tn, msg):
     print "DEBUG: Sending msg=" + msg
-    tn.write("PRIVMSG " + fbchan + " " + msg + "\n")
+    tn.write("PRIVMSG " + fbchan + " :" + msg + "\n")
 
 def cleanup(msg):
     return msg.split("PRIVMSG " + fbchan + " :")[1]
@@ -47,7 +47,7 @@ def telnetMain():
         print "DEBUG: cleanedUp=" + cleanup(match.group(0))
         #print "DEBUG: output=" + output
         if idx == 0:
-            sendMsg(tn, 'Yup. Bro')
+            sendMsg(tn, "Yup. That's a nerd.")
         if idx == 1:
             sendMsg(tn, "Holdmahbeer.")
             sendMsg(tn, bng.handle_response(cleanup(match.group(0))))
