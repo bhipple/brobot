@@ -9,9 +9,10 @@ server = "localhost"
 nickname = "brobot"
 realname = "Bro"
 regpass = os.environ["IRCPASSWORD"]
+fbchan = "#the"
 
 irc = IRC()
-irc.connect(server, channel, nickname, realname, regpass)
+irc.connect(server, channel, nickname, realname, regpass, fbchan)
  
 while True:
     text = irc.get_text()
@@ -21,4 +22,3 @@ while True:
         irc.send(channel, "nerds")
     elif "PRIVMSG" in text and channel in text and "bang" in text.lower():
         irc.send(channel, bng.handle_response(text))
-
