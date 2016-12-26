@@ -13,6 +13,8 @@ regpass = os.environ["IRCPASSWORD"]
 fbchan = "#the"
 
 def sendMsg(tn, msg):
+    if not msg:
+        return
     print "DEBUG: Sending msg=" + msg
     tn.write("PRIVMSG " + fbchan + " :" + msg + "\n")
 
@@ -49,7 +51,6 @@ def telnetMain():
         if idx == 0:
             sendMsg(tn, "Yup. That's a nerd.")
         if idx == 1:
-            sendMsg(tn, "Holdmahbeer.")
             sendMsg(tn, bng.handle_response(cleanup(match.group(0))))
 
 if __name__ == '__main__':
