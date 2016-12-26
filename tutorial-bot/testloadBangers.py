@@ -18,4 +18,5 @@ def add_banger(text):
 
 if __name__ == '__main__':
     # add_banger('add:https://www.youtube.com/watch?v=tlpcXYkJa9I')
-    add_banger('add: https://www.youtube.com/watch?v=E0COe99xJnw')
+    # add_banger('add: https://www.youtube.com/watch?v=E0COe99xJnw')
+    print('lol'.replace(' ', ''))

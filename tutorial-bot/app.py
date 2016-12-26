@@ -97,12 +97,10 @@ def log(message):  # simple wrapper for logging to stdout on heroku
     sys.stdout.flush()
 
 
-
 def load_bangers():
     '''Loads the bangers from the text file'''
     with open('bangers.txt') as f:
-        bangers = f.readlines()
-        bangers = [banger.replace('\n','') for banger in bangers]
+        bangers = [banger.replace('\n','') for banger in f.readlines()]
     return bangers
 
 
@@ -111,14 +109,13 @@ def add_banger(text):
     Adds a banger to the text file.
     proper input would be "banger add:link"
     '''
-    text = text.split('add:')[1]
-    try:
-        text.replace(' ', '')
-    except:
-        pass
+    text = text.split('add:')[1].replace(' ', '')
 
     with open('bangers.txt', 'a') as f:
         f.write(text)
+
+    return True
+
 
 def count():
     '''Returns a count of the bangers'''
@@ -126,8 +123,5 @@ def count():
     return 'You have ' + str(len(bangers)) + ' bangers'
 
 
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
