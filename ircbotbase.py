@@ -12,15 +12,16 @@ class IRC:
     def send(self, chan, msg):
         self.irc.send("PRIVMSG " + chan + " " + msg + "n")
  
-    def connect(self, server, channel, botnick, realname, regpass):
+    def connect(self, server, channel, botnick, realname, regpass, fbchan):
         #defines the socket
         print "connecting to:"+server
         self.irc.connect((server, 6667))                                                         #connects to the server
-        self.irc.send("USER " + botnick + " 8 *: " + realname + " :This is a fun bot!n") #user authentication
+       
         self.irc.send("NICK" + botnick + "n")               
+	self.irc.send("USER " + botnick + " 8 *: " + realname + "n") #user authentication
         self.irc.send("JOIN" + channel + "n")        #join the chan
 	self.irc.send("PRIVMSG " + channel + " :identify " + regpass + "n")  
-	
+	self.irc.send("JOIN " + fbchan + "n")
  
     def get_text(self):
         text=self.irc.recv(2040)  #receive the text

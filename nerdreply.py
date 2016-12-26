@@ -19,3 +19,6 @@ while True:
  
     if "PRIVMSG" in text and channel in text and "nerds" in text:
         irc.send(channel, "nerds")
+    elif "PRIVMSG" in text and channel in text and "bang" in text.lower():
+        irc.send(channel, bng.handle_response(text))
+
