@@ -49,7 +49,7 @@ def telnetMain():
         print "DEBUG: cleanedUp=" + cleanup(match.group(0))
         #print "DEBUG: output=" + output
         if idx == 0:
-            sendMsg(tn, "Yup. That's a nerd.")
+            sendMsg(tn, "nerd")
         if idx == 1:
             sendMsg(tn, bng.handle_response(cleanup(match.group(0))))
 
