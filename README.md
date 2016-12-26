@@ -1,6 +1,7 @@
 # iBangersBot
+Drops bangers from Youtube into your favorite messenger platform via bitlbee irc.
 
-Drops bangers from Spotify into your favorite messenger platform.
-
-## callback url
-https://peaceful-cove-26007.herokuapp.com/
+To use:
+* Setup bitlbee and configure it to connect to facebook
+* export IRCPASSWORD with the bitlbee identify password
+* Start nerdreply.py
