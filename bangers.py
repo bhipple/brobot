@@ -31,13 +31,13 @@ def add_banger(text):
     proper input would be "add link"
     '''
     text = text.split('add')[1].replace(' ', '').strip()
-    check = subprocess.check_output('curl -Isl ' + text, shell=True)
-    if '200' in check:
-        with open('bangers.txt', 'a') as f:
-            f.write(text)
-        return 'Successfully added banger'
-    else:
-        return "That didn't work"
+    # check = subprocess.check_output('curl -Isl ' + text, shell=True)
+    # if '200' in check:
+    with open('bangers.txt', 'a') as f:
+        f.write(text)
+    return 'Successfully added banger'
+    # else:
+        # return "That didn't work"
 
 
 def count():
