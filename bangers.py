@@ -2,10 +2,12 @@ import random
 
 def handle_response(text):
     '''Determines which function to call based on a message'''
-    if ':add' in text.lower():
+    if 'add' in text.lower():
         return add_banger(text)
     elif 'count' in text.lower():
         return count()
+    elif 'help' in text.lower():
+        return banger_help()
     else:
         return select_banger()
 
@@ -25,9 +27,9 @@ def load_bangers():
 def add_banger(text):
     '''
     Adds a banger to the text file.
-    proper input would be "banger add:link"
+    proper input would be "add link"
     '''
-    text = text.split('add:')[1].replace(' ', '')
+    text = text.split('add')[1].replace(' ', '')
     with open('bangers.txt', 'a') as f:
         f.write(text)
 
@@ -37,6 +39,9 @@ def count():
     return 'You have ' + str(len(bangers)) + ' bangers'
 
 
+def banger_help():
+    '''Gives some quick help info for bangerBot'''
+    return 'say something with banger to get a banger.  Say add <link> to add.'''
 if __name__ == '__main__':
     print(select_banger())
     print(select_banger())
