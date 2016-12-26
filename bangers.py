@@ -12,7 +12,7 @@ def handle_response(text):
 
 def select_banger():
     '''Returns a random banger from the bangers text file'''
-    return random.choice(load_bangers)
+    return random.choice(load_bangers())
 
 
 def load_bangers():
@@ -35,3 +35,10 @@ def count():
     '''Returns a count of the bangers'''
     bangers = load_bangers()
     return 'You have ' + str(len(bangers)) + ' bangers'
+
+
+if __name__ == '__main__':
+    print(select_banger())
+    print(select_banger())
+    print(select_banger())
+    print(count())
