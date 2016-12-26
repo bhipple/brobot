@@ -97,6 +97,7 @@ def log(message):  # simple wrapper for logging to stdout on heroku
     sys.stdout.flush()
 
 
+
 def load_bangers():
     '''Loads the bangers from the text file'''
     with open('bangers.txt') as f:
