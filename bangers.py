@@ -1,4 +1,5 @@
 import random
+import subprocess
 
 def handle_response(text):
     '''Determines which function to call based on a message'''
@@ -29,9 +30,15 @@ def add_banger(text):
     Adds a banger to the text file.
     proper input would be "add link"
     '''
-    text = text.split('add')[1].replace(' ', '')
-    with open('bangers.txt', 'a') as f:
-        f.write(text)
+    text = text.split('add')[1].replace(' ', '').strip()
+    check = subprocess.check_output('curl -Isl ' + text, shell=True)
+    if '200' in check:
+        with open('bangers.txt', 'a') as f:
+            f.write(text)
+        return 'Successfully added banger'
+    else:
+        return "That didn't work"
+
 
 def count():
     '''Returns a count of the bangers'''
