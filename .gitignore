@@ -1,3 +1,4 @@
 *.pyc
 *.swp
 bangers.txt
+*.sqlite3
