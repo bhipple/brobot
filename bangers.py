@@ -2,6 +2,7 @@ import random
 import subprocess
 import sqlite3
 import os
+import datetime
 from initDatabase import createDB
 
 def handle_response(text):
@@ -17,8 +18,18 @@ def handle_response(text):
 
 
 def select_banger():
-    '''Returns a random banger from the bangers text file'''
-    return random.choice(load_bangers())
+    '''Returns a random banger from the database'''
+    # How it worked on the text file
+    # return random.choice(load_bangers())
+
+    conn = sqlite3.connect('iBangersBotDB.sqlite3')
+    cur = conn.cursor()
+
+
+    cur.execute('SELECT URL FROM Bangers order by Random() LIMIT 1;')
+    url = cur.fetchone()
+    conn.close()
+    return url
 
 
 def load_bangers():
@@ -28,21 +39,35 @@ def load_bangers():
     return bangers
 
 
-def add_banger(text, userID, DBConn):
+def add_banger(text, userID):
     '''
     Adds a banger to the text file.
     proper input would be "add link"
     '''
+    # Strips input text to just be the url
     text = text.split('add')[1].replace(' ', '').strip()
+
     # check = subprocess.check_output('curl -Isl ' + text, shell=True)
     # if '200' in check:
+
+    # Append to bangers.txt
     with open('bangers.txt', 'a') as f:
         f.write(text)
 
+    # Insert into SQLDB
     conn = sqlite3.connect('iBangersBotDB.sqlite3')
     cur = conn.cursor()
-    cur.execute('INSERT INTO Bangers VALUES ('
 
+    cur.execute("INSERT INTO Bangers VALUES (?, ?, ?, ?, ?, ?)",
+                1,
+                text,
+                'Title Placeholder',
+                userID,
+                datetime.datetime.now(),
+                0)
+
+    conn.commit()
+    conn.close()
 
 
     return 'Successfully added banger'
@@ -53,9 +78,10 @@ def lookup_userID(user):
     '''Looks up the userID from the user which sent a message'''
     conn = sqlite3.connect('iBangersBotDB.sqlite3')
     cur = conn.cursor()
-
     cur.execute('SELECT UserID FROM Users WHERE Name = ?', (user,))
-    return cur.fetchone()[0]
+    userID =  cur.fetchone()[0]
+    conn.close()
+    return userID
 
 
 def count():
@@ -72,8 +98,23 @@ def banger_help():
 if __name__ == '__main__':
     if 'iBangersBotDB.sqlite3' not in os.listdir():
         createDB()
+    string = r'''add https://www.youtube.com/watch?v=_4X-LNUL-tA'''
+    add_banger(string, 5)
+    # add_banger(r'''add https://www.youtube.com/watch?v=HIOxVovud88''', 5)
+    # add_banger(r'''add https://www.youtube.com/watch?v=dTW2MxfqVLI''', 5)
+
     print(select_banger())
-    print(select_banger())
-    print(select_banger())
-    print(count())
+    # print(count())
     print(lookup_userID('Mike'))
+
+
+
+
+
+
+
+
+
+
+
+

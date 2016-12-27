@@ -8,9 +8,8 @@ def createDB():
     cur.execute('''
     CREATE TABLE Bangers(
     BangerID INT,
-    Song TEXT,
-    Artist TEXT,
     URL TEXT,
+    Title TEXT,
     UserID INT,
     Date TEXT,
     Plays INT,
