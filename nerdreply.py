@@ -22,6 +22,10 @@ def sendMsg(tn, msg):
 def cleanup(msg):
     return msg.split("PRIVMSG " + fbchan + " :")[1]
 
+def grabName(msg):
+    '''name is between the : and the ! on the match string.'''
+    return msg.split(':')[1].split('!')[0]
+
 def telnetMain():
     print "DEBUG: Opening telnet handle"
     tn = Telnet("localhost", 6667)
@@ -53,12 +57,21 @@ def telnetMain():
         if idx == 0:
             sendMsg(tn, "nerd")
         if idx == 1:
-            sendMsg(tn, bng.handle_response(cleanup(match.group(0))))
+            sendMsg(tn, bng.handle_response(cleanup(match.group(0)),
+                                            grabName(match.group(0))))
 
 if __name__ == '__main__':
     # Check to make sure database exists
-    if 'iBangersBotDB.sqlite3' not in os.listdir():
+    if 'iBangersBotDB.sqlite3' not in os.listdir(os.getcwd()):
         createDB()
+        with open('bangers.txt') as f:
+            for banger in f.readlines():
+                try:
+                    add_banger(banger, 5, False)
+                except Exception as e:
+                    print(e)
+                    print('Banger already added')
+
 
     # Run the bot
     telnetMain()
