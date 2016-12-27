@@ -35,7 +35,7 @@ def add_banger(text):
     # check = subprocess.check_output('curl -Isl ' + text, shell=True)
     # if '200' in check:
     with open('bangers.txt', 'a') as f:
-        f.write(text)
+        f.write(text + '\n')
     return 'Successfully added banger'
     # else:
         # return "That didn't work"
