@@ -1,5 +1,6 @@
 import random
 import subprocess
+import os
 
 def handle_response(text):
     '''Determines which function to call based on a message'''

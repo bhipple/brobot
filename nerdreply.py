@@ -3,6 +3,7 @@ import os
 import random
 import re
 import bangers as bng
+import weather as wthr
 import pdb
 from telnetlib import Telnet
 
@@ -16,7 +17,7 @@ def sendMsg(tn, msg):
     if not msg:
         return
     print "DEBUG: Sending msg=" + msg
-    tn.write("PRIVMSG " + fbchan + " :" + msg + "\n")
+    tn.write(("PRIVMSG " + fbchan + " :" + msg + "\n").encode('utf-8'))
 
 def cleanup(msg):
     return msg.split("PRIVMSG " + fbchan + " :")[1]
@@ -41,7 +42,7 @@ def telnetMain():
 
     print "DEBUG: Telnetmain finished"
 
-    expressions = [".*nerd.*\r\n", ".*bang.*\r\n"]
+    expressions = [".*nerd.*\r\n", ".*bang.*\r\n", ".*philly*.\r\n", ".*nyc*.\r\n"]
     while True:
         (idx, match, output) = tn.expect(expressions)
         print "DEBUG: idx=" + str(idx)
@@ -52,6 +53,8 @@ def telnetMain():
             sendMsg(tn, "nerd")
         if idx == 1:
             sendMsg(tn, bng.handle_response(cleanup(match.group(0))))
+        if idx == 2 or idx == 3:
+            sendMsg(tn, wthr.handle_response(cleanup(match.group(0))))
 
 if __name__ == '__main__':
     telnetMain()
