@@ -5,6 +5,7 @@ import re
 import bangers as bng
 import pdb
 from telnetlib import Telnet
+from initDatabase import createDB
 
 channel = "&bitlebee"
 nickname = "brobot"
@@ -41,6 +42,7 @@ def telnetMain():
 
     print "DEBUG: Telnetmain finished"
 
+
     expressions = [".*nerd.*\r\n", ".*bang.*\r\n"]
     while True:
         (idx, match, output) = tn.expect(expressions)
@@ -54,4 +56,9 @@ def telnetMain():
             sendMsg(tn, bng.handle_response(cleanup(match.group(0))))
 
 if __name__ == '__main__':
+    # Check to make sure database exists
+    if 'iBangersBotDB.sqlite3' not in os.listdir():
+        createDB()
+
+    # Run the bot
     telnetMain()
