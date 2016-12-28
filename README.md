@@ -1,6 +1,5 @@
 # iBangersBot
-Drops bangers from Youtube into your favorite messenger platform via bitlbee irc
-.
+Drops bangers from Youtube into your favorite messenger platform via bitlbee irc.
 
 To use:
 * Setup bitlbee and configure it to connect to facebook
