@@ -30,7 +30,6 @@ deb http://ftp.debian.org/debian jessie-backports main
 ```
 apt-get update
 apt-get install irssi bitlbee bitlebee-dev bitlbee-libpurble bitlbee-facebookIn /etc/bitlbee/bitlbee.conf
-
 ```
 In /etc/bitlbee/bitlbee.conf set the following 
 
