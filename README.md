@@ -52,6 +52,10 @@ account facebook on
 #list fbchats 
 fbchat list
 fbjoin facebook <ID> <channel>
+account facebook set mark_read true
+account facebook set mark_reply true
+account facebook set show_unread false
+account facebook set group_chat_open true
 ```
 
 
