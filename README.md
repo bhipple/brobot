@@ -5,6 +5,7 @@ Drops bangers from Youtube into your favorite messenger platform via bitlbee irc
 To use:
 * Setup bitlbee and configure it to connect to facebook
 * export IRCPASSWORD with the bitlbee identify password
+* export DARKSKYKEY with the DarkSky API key
 * Start nerdreply.py
 
 
@@ -77,3 +78,5 @@ account facebook set group_chat_open true
 https://jgeboski.github.io/#debian-and-ubuntu
 https://wiki.bitlbee.org/Packages
 https://wiki.bitlbee.org/ChangingPasswords
+https://darksky.net/dev/
+
