@@ -26,9 +26,22 @@ deb http://download.opensuse.org/repositories/home:/jgeboski/<version> ./
 deb http://code.bitlbee.org/debian/master/jessie/amd64/ ./
 deb http://ftp.debian.org/debian jessie-backports main
 ```
+
 ```
 apt-get update
-apt-get install irssi bitlbee bitlebee-dev bitlbee-libpurble bitlbee-facebook
+apt-get install irssi bitlbee bitlebee-dev bitlbee-libpurble bitlbee-facebookIn /etc/bitlbee/bitlbee.conf
+
+```
+In /etc/bitlbee/bitlbee.conf set the following 
+
+```
+RunMode = ForkDaemon
+
+DaemonInterface = 127.0.0.1
+DaemonPort = 6667
+
+PingInterval = 0
+PingTimeOut = 0
 ```
 
 Start bitlbee & irssi
@@ -57,6 +70,8 @@ account facebook set mark_reply true
 account facebook set show_unread false
 account facebook set group_chat_open true
 ```
+
+
 
 
 # Further Reference:
