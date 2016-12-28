@@ -74,9 +74,9 @@ account facebook set group_chat_open true
 
 
 
-# Further Reference:
-https://jgeboski.github.io/#debian-and-ubuntu
-https://wiki.bitlbee.org/Packages
-https://wiki.bitlbee.org/ChangingPasswords
-https://darksky.net/dev/
+## Further Reference:
+* https://jgeboski.github.io/#debian-and-ubuntu
+* https://wiki.bitlbee.org/Packages
+* https://wiki.bitlbee.org/ChangingPasswords
+* https://darksky.net/dev/
 
