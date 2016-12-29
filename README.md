@@ -70,6 +70,23 @@ account facebook set show_unread false
 account facebook set group_chat_open true
 ```
 
+Set and load env variables 
+
+Create bangers.txt
+
+```
+touch ~/iBangersBot/bangers.txt
+
+```
+
+
+# Weather
+
+```
+ 
+```
+
+
 ## Further Reference:
 * https://jgeboski.github.io/#debian-and-ubuntu
 * https://wiki.bitlbee.org/Packages

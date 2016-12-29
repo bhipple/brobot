@@ -18,7 +18,7 @@ def handle_response(text):
 
 
 def philly_weather():
-    url = "https://api.darksky.net/forecast/" + dskey + "/39.9526,-75.1652"
+    url = "https://api.darksky.net/forecast/" + dskey + "/39.95,-75.16"
     response = urllib.urlopen(url)
     parsed_json = json.loads(response.read())
     
