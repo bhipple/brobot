@@ -8,10 +8,11 @@ from telnetlib import Telnet
 from initDatabase import createDB
 
 channel = "&bitlebee"
-nickname = "brobot"
-realname = "Bro"
+nickname = os.environ["NICKNAME"]
+username = os.environ["USER"]
+realname = os.environ["REALNAME"]
 regpass = os.environ["IRCPASSWORD"]
-fbchan = "#the"
+fbchan = os.environ["FBCHAN"]
 
 def sendMsg(tn, msg):
     if not msg:
