@@ -70,9 +70,6 @@ account facebook set show_unread false
 account facebook set group_chat_open true
 ```
 
-
-
-
 ## Further Reference:
 * https://jgeboski.github.io/#debian-and-ubuntu
 * https://wiki.bitlbee.org/Packages
