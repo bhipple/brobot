@@ -6,6 +6,9 @@ import bangers as bng
 import weather as wthr
 import pdb
 from telnetlib import Telnet
+import sys
+import codecs
+sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 channel = "&bitlebee"
 nickname = os.environ["NICKNAME"]
