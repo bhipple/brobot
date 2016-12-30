@@ -4,6 +4,9 @@ import random
 import re
 import bangers as bng
 import weather as wthr
+import sys
+import codecs
+sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 import pdb
 from telnetlib import Telnet
 
