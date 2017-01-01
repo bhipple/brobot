@@ -45,7 +45,7 @@ def telnetMain():
 
     print "DEBUG: Telnetmain finished"
 
-    expressions = [".*nerd.*\r\n", ".*bang.*\r\n", ".*philly*.\r\n", ".*nyc*.\r\n", ".dale.*\r\n"]
+    expressions = [".*nerd.*\r\n", ".*bang.*\r\n", ".*philly*.\r\n", ".*nyc*.\r\n", ".*dale.*\r\n"]
     while True:
         (idx, match, output) = tn.expect(expressions)
         print "DEBUG: idx=" + str(idx)
