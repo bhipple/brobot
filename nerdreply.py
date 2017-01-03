@@ -4,6 +4,9 @@ import random
 import re
 import bangers as bng
 import weather as wthr
+import sys
+import codecs
+sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 import pdb
 from telnetlib import Telnet
 import sys
@@ -60,7 +63,11 @@ def telnetMain():
         if idx == 2 or idx == 3:
             sendMsg(tn, wthr.handle_response(cleanup(match.group(0))))
         if idx == 4:
+<<<<<<< HEAD
             sendMsg(tn, "daaaale")
+=======
+            sendMsg(tn, "daaale")
+>>>>>>> 540599105c2484c37211d1307f10fa9a0961dff5
 
 if __name__ == '__main__':
     telnetMain()

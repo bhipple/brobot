@@ -21,7 +21,7 @@ def select_banger():
 
 def load_bangers():
     '''Loads the bangers from the text file'''
-    with open('bangers.txt') as f:
+    with open('/home/brobot/iBangersBot/bangers.txt') as f:
         bangers = [banger.replace('\n','') for banger in f.readlines()]
     return bangers
 
