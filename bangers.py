@@ -2,57 +2,37 @@ import random
 import subprocess
 import os
 
-def handle_response(text):
-    '''Determines which function to call based on a message'''
-    if 'add' in text.lower():
-        return add_banger(text)
-    elif 'count' in text.lower():
-        return count()
-    elif 'help' in text.lower():
-        return banger_help()
-    else:
-        return select_banger()
-
+def bangersFile():
+    return os.environ.get('BANGERS_FILE') or '/home/brobot/iBangersBot/bangers.txt'
 
 def select_banger():
     '''Returns a random banger from the bangers text file'''
     return random.choice(load_bangers())
 
-#chris the bangers.txt was hard coded here to work with the systemd file
-#Well need to fix that later
 def load_bangers():
     '''Loads the bangers from the text file'''
-    with open('/home/brobot/iBangersBot/bangers.txt') as f:
+    with open(bangersFile()) as f:
         bangers = [banger.replace('\n','') for banger in f.readlines()]
     return bangers
-
 
 def add_banger(text):
     '''
     Adds a banger to the text file.
-    proper input would be "add link"
+    proper input would be "add <link>"
     '''
-    text = text.split('add')[1].replace(' ', '').strip()
-    # check = subprocess.check_output('curl -Isl ' + text, shell=True)
-    # if '200' in check:
-    with open('bangers.txt', 'a') as f:
-        f.write(text)
-    return 'Successfully added banger'
-    # else:
-        # return "That didn't work"
-
+    try:
+        text = text.split('add')[1].replace(' ', '').strip()
+        with open(bangersFile(), 'a') as f:
+            f.write(text)
+        return 'Successfully added banger'
+    except:
+        return "That didn't work"
 
 def count():
     '''Returns a count of the bangers'''
     bangers = load_bangers()
     return 'You have ' + str(len(bangers)) + ' bangers'
 
-
 def banger_help():
     '''Gives some quick help info for bangerBot'''
     return 'say something with banger to get a banger.  Say add <link> to add.'''
-if __name__ == '__main__':
-    print(select_banger())
-    print(select_banger())
-    print(select_banger())
-    print(count())

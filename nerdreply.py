@@ -2,8 +2,8 @@
 import os
 import random
 import re
-import bangers as bng
-import weather as wthr
+import bangers
+import weather
 import sys
 import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
@@ -13,58 +13,35 @@ import sys
 import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
-channel = "&bitlebee"
-nickname = os.environ["NICKNAME"]
-username = os.environ["USER"]
-realname = os.environ["REALNAME"]
-regpass = os.environ["IRCPASSWORD"]
-fbchan = os.environ["FBCHAN"]
+INSPIRATION = "When you're out there...partying...horswing around...someone out there at the same time is working hard. Someone is getting smarter and someone is winning, just remember that!"
 
-def sendMsg(tn, msg):
-    if not msg:
-        return
-    print "DEBUG: Sending msg=" + msg
-    tn.write(("PRIVMSG " + fbchan + " :" + msg + "\n").encode('utf-8'))
+class Handler():
+    def __init__(self, r, f):
+        self.regex = r
+        self.func = f
 
-def cleanup(msg):
-    return msg.split("PRIVMSG " + fbchan + " :")[1]
+# For every regular expression that can match, attach a function to handle the
+# business logic. Note that while some functions do not require an argument,
+# it's simpler to just pass the unused message in.
+def handlers():
+    return [ Handler(".*nerd.*\r\n", lambda m: "nerd")
+           , Handler(".*dale.*\r\n", lambda m: "daaale")
+           , Handler(".*study.*\r\n", lambda m: INSPIRATION)
 
-def telnetMain():
-    print "DEBUG: Opening telnet handle"
-    tn = Telnet("localhost", 6667)
-    tn.set_debuglevel(5)
-    tn.read_until("BitlBee-IRCd initialized, please go on")
+           # Weather currently disabled due to UTF-8 issues.
+           #, Handler(".*philly*.\r\n", lambda m: weather.philly_weather())
+           #, Handler(".*nyc*.\r\n", lambda m: weather.nyc_weather())
 
-    tn.write("NICK " + nickname +"\n")
-    tn.write("USER " + username + " 8 *: " + realname + "\n")
-    tn.read_until("identify yourself", 3)
+           , Handler(".*banger count.*\r\n", lambda m: bangers.count())
+           , Handler(".*banger add https.*\r\n", lambda m: bangers.add_banger(m))
+           , Handler(".*banger help.*\r\n", lambda m: bangers.banger_help())
 
-    print "DEBUG: Joining bitlbee"
-    tn.write("JOIN &bitlbee\n")
-    tn.write("PRIVMSG &bitlbee :identify " + regpass + "\n")
-    tn.read_until("facebook - Logging in: Logged in", 3)
+           # Since this is a default, it has to be after the other banger cmds
+           , Handler(".*banger.*\r\n", lambda m: bangers.select_banger())
+           ]
 
-    print "DEBUG: Joining channel"
-    tn.write("JOIN " + fbchan + "\n")
+def regexes():
+    return map(lambda h: h.regex, handlers())
 
-    print "DEBUG: Telnetmain finished"
-
-    expressions = [".*nerd.*\r\n", ".*bang.*\r\n", ".*philly*.\r\n", ".*nyc*.\r\n", ".*dale.*\r\n", ".*study.*\r\n"]
-    while True:
-        (idx, match, output) = tn.expect(expressions)
-        print "DEBUG: idx=" + str(idx)
-        print "DEBUG: match=" + match.group(0)
-        print "DEBUG: cleanedUp=" + cleanup(match.group(0))
-        #print "DEBUG: output=" + output
-        if idx == 0:
-            sendMsg(tn, "nerd")
-        if idx == 1:
-            sendMsg(tn, bng.handle_response(cleanup(match.group(0))))
-        if idx == 2 or idx == 3:
-            sendMsg(tn, wthr.handle_response(cleanup(match.group(0))))
-        if idx == 4:
-            sendMsg(tn, "daaale")
-        if idx == 5:
-            sendMsg(tn, "When you're out there...partying...horswing around...someone is getting stronger, smarter...")
-if __name__ == '__main__':
-    telnetMain()
+def requestProcessor(idx, inp):
+    return handlers()[idx].func(inp)
