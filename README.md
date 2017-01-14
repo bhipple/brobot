@@ -1,4 +1,4 @@
-# Brobot
+# Brobot [![Build Status](https://travis-ci.org/C-Hipple/brobot.svg?branch=master)](https://travis-ci.org/C-Hipple/brobot)
 Facebook/IRC group chat bot that drops bangers from Youtube into your favorite
 via bitlbee irc.
 
