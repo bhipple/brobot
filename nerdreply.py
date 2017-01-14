@@ -9,12 +9,16 @@ import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 import pdb
 from telnetlib import Telnet
+import sys
+import codecs
+sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 channel = "&bitlebee"
-nickname = "brobot"
-realname = "Bro"
+nickname = os.environ["NICKNAME"]
+username = os.environ["USER"]
+realname = os.environ["REALNAME"]
 regpass = os.environ["IRCPASSWORD"]
-fbchan = "#the"
+fbchan = os.environ["FBCHAN"]
 
 def sendMsg(tn, msg):
     if not msg:
@@ -31,8 +35,8 @@ def telnetMain():
     tn.set_debuglevel(5)
     tn.read_until("BitlBee-IRCd initialized, please go on")
 
-    tn.write("NICK brobot\n")
-    tn.write("USER brobot 8 *: Alex\n")
+    tn.write("NICK " + nickname +"\n")
+    tn.write("USER " + username + " 8 *: " + realname + "\n")
     tn.read_until("identify yourself", 3)
 
     print "DEBUG: Joining bitlbee"
