@@ -43,5 +43,5 @@ def handlers():
 def regexes():
     return map(lambda h: h.regex, handlers())
 
-def requestProcessor(idx, inp):
+def processRequest(idx, inp):
     return handlers()[idx].func(inp)
