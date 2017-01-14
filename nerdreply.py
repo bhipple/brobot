@@ -24,9 +24,9 @@ class Handler():
 # business logic. Note that while some functions do not require an argument,
 # it's simpler to just pass the unused message in.
 def handlers():
-    return [ Handler(".*nerd.*\r\n", lambda m: "nerd")
-           , Handler(".*dale.*\r\n", lambda m: "daaale")
-           , Handler(".*study.*\r\n", lambda m: INSPIRATION)
+    return [ Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
+           , Handler(".*[Dd]ale.*\r\n", lambda m: "daaale")
+           , Handler(".*(study|horsing around|factory).*\r\n", lambda m: INSPIRATION)
 
            # Weather currently disabled due to UTF-8 issues.
            #, Handler(".*philly*.\r\n", lambda m: weather.philly_weather())
