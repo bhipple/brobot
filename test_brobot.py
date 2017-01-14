@@ -32,7 +32,7 @@ class TestNerdreply(unittest.TestCase):
 class TestBangers(unittest.TestCase):
     def test_default_bangers_file(self):
         os.environ['BANGERS_FILE'] = ''
-        self.assertEqual('/home/brobot/iBangersBot/bangers.txt', bangers.bangersFile())
+        self.assertEqual('/home/brobot/brobot/bangers.txt', bangers.bangersFile())
         os.environ['BANGERS_FILE'] = 'test_bangers.txt'
 
     def test_override_bangers(self):
