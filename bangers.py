@@ -3,7 +3,7 @@ import subprocess
 import os
 
 def bangersFile():
-    return os.environ.get('BANGERS_FILE') or '/home/brobot/iBangersBot/bangers.txt'
+    return os.environ.get('BANGERS_FILE') or '/home/brobot/brobot/bangers.txt'
 
 def select_banger():
     '''Returns a random banger from the bangers text file'''
