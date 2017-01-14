@@ -1,4 +1,4 @@
-# iBangersBot
+# Brobot
 Drops bangers from Youtube into your favorite messenger platform via bitlbee irc.
 
 To use:
