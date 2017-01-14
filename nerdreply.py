@@ -45,7 +45,7 @@ def telnetMain():
 
     print "DEBUG: Telnetmain finished"
 
-    expressions = [".*nerd.*\r\n", ".*bang.*\r\n", ".*philly*.\r\n", ".*nyc*.\r\n", ".*dale.*\r\n", ".*study*.\r\n"]
+    expressions = [".*nerd.*\r\n", ".*bang.*\r\n", ".*philly*.\r\n", ".*nyc*.\r\n", ".*dale.*\r\n", ".*study.*\r\n"]
     while True:
         (idx, match, output) = tn.expect(expressions)
         print "DEBUG: idx=" + str(idx)
@@ -60,7 +60,7 @@ def telnetMain():
             sendMsg(tn, wthr.handle_response(cleanup(match.group(0))))
         if idx == 4:
             sendMsg(tn, "daaale")
-        if idx == 5;
+        if idx == 5:
             sendMsg(tn, "When you're out there...partying...horswing around...someone is getting stronger, smarter...")
 if __name__ == '__main__':
     telnetMain()
