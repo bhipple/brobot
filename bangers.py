@@ -18,7 +18,8 @@ def select_banger():
     '''Returns a random banger from the bangers text file'''
     return random.choice(load_bangers())
 
-
+#chris the bangers.txt was hard coded here to work with the systemd file
+#Well need to fix that later
 def load_bangers():
     '''Loads the bangers from the text file'''
     with open('/home/brobot/iBangersBot/bangers.txt') as f:
