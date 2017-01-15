@@ -46,9 +46,10 @@ class TestNerdreply(unittest.TestCase):
         self.assertEqual("nerd", runHandlers("I see a nerd in here"))
 
     def test_inspiration(self):
-        self.assertEqual(nerdreply.INSPIRATION, runHandlers("You should be studying."))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("factory?"))
+        self.assertEqual(nerdreply.INSPIRATION, runHandlers("factorio?"))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horsing around man!"))
+        self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horswing around man!"))
 
 
 class TestBangers(unittest.TestCase):

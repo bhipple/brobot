@@ -26,7 +26,7 @@ class Handler():
 def handlers():
     return [ Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
            , Handler(".*[Dd]ale.*\r\n", lambda m: "daaale")
-           , Handler(".*(study|horsing around|factory).*\r\n", lambda m: INSPIRATION)
+           , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
 
            # Weather currently disabled due to UTF-8 issues.
            #, Handler(".*philly*.\r\n", lambda m: weather.philly_weather())
