@@ -1,5 +1,6 @@
+*.html
 *.pyc
 *.swp
+USlatlong.txt
 bangers.txt
 worldcitiespop.txt
-USlatlong.txt

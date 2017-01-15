@@ -9,6 +9,6 @@ remote=$(git log origin/master --pretty=%H)
 
 if ! [ "$current" = "$remote" ]; then
     git pull origin master
-    echo "Restarting nerdbot."
+    echo "Updated nerdbot to git sha $remote at $(date)"
     sudo service nerdbot restart
 fi
