@@ -1,6 +1,5 @@
 *.html
 *.pyc
 *.swp
-USlatlong.txt
-bangers.txt
-worldcitiespop.txt
+*.txt
+!test_bangers.txt

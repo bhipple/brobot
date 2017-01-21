@@ -9,9 +9,6 @@ import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 import pdb
 from telnetlib import Telnet
-import sys
-import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 INSPIRATION = "When you're out there...partying...horswing around...someone out there at the same time is working hard. Someone is getting smarter and someone is winning, just remember that!"
 
@@ -29,8 +26,8 @@ def handlers():
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
 
            # Weather currently disabled due to UTF-8 issues.
-           #, Handler(".*philly*.\r\n", lambda m: weather.philly_weather())
-           #, Handler(".*nyc*.\r\n", lambda m: weather.nyc_weather())
+           #, Handler(".*forecast*.\r\n", lambda m: weather.weather())
+            
 
            , Handler(".*banger count.*\r\n", lambda m: bangers.count())
            , Handler(".*banger add https.*\r\n", lambda m: bangers.add_banger(m))

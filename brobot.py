@@ -3,11 +3,7 @@ import os
 import random
 import re
 import bangers
-import weather
 import nerdreply
-import sys
-import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 import pdb
 from telnetlib import Telnet
 import sys
@@ -21,6 +17,9 @@ username = os.environ["USER"]
 realname = os.environ["REALNAME"]
 regpass = os.environ["IRCPASSWORD"]
 fbchan = os.environ["FBCHAN"]
+dskey = os.environ["DARKSKYKEY"]
+
+
 
 def sendMsg(tn, msg):
     if not msg:
