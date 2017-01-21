@@ -6,21 +6,13 @@ import datetime
 from string import ascii_uppercase
 from initDatabase import createDB
 
-def handle_response(text, name):
-    '''Determines which function to call based on a message'''
-    if 'add' in text.lower():
-        return add_banger(text, name)
-    elif 'count' in text.lower():
-        return count()
-    elif 'help' in text.lower():
-        return banger_help()
-    else:
-        return select_banger()
+def bangersFile():
+    return os.environ.get('BANGERS_FILE') or '/home/brobot/brobot/brobotDB.sqlite3'
 
 
 def select_banger():
     '''Returns a random banger from the database'''
-    conn = sqlite3.connect('iBangersBotDB.sqlite3')
+    conn = sqlite3.connect(bangersFile())
     cur = conn.cursor()
     cur.execute('SELECT URL FROM Bangers order by Random() LIMIT 1;')
     url = cur.fetchone()
@@ -28,17 +20,16 @@ def select_banger():
     return url[0]
 
 
-def add_banger(text, userID, add=True):
+def add_banger(text, userID):
     '''
     Adds a banger to the text file.
     proper input would be "add link"
     '''
     # Strips input text to just be the url
-    if add is True:
-        text = text.split('add')[1].replace(' ', '').strip()
+    text = text.split('add')[1].replace(' ', '').strip()
 
     # Insert into SQLDB
-    conn = sqlite3.connect('iBangersBotDB.sqlite3')
+    conn = sqlite3.connect(bangersFile())
     cur = conn.cursor()
 
     cur.execute("INSERT INTO Bangers VALUES (?, ?, ?, ?, ?, ?)", [
@@ -51,7 +42,6 @@ def add_banger(text, userID, add=True):
 
     conn.commit()
     conn.close()
-
 
     return 'Successfully added banger'
     # else:
@@ -81,18 +71,22 @@ def lookup_userID(name):
                 break
         name = first_name
 
-    conn = sqlite3.connect('iBangersBotDB.sqlite3')
+    conn = sqlite3.connect(bangersFile())
     cur = conn.cursor()
 
     cur.execute('SELECT UserID FROM Users WHERE Name = ?', (name,))
     userID =  cur.fetchone()[0]
+
+    if userID is None:
+        userID = '11'
+
     conn.close()
     return userID
 
 
 def count():
     '''Returns a count of the bangers'''
-    conn = sqlite3.connect('iBangersBotDB.sqlite3')
+    conn = sqlite3.connect(bangersFile())
     cur = conn.cursor()
     num_bangers = cur.execute('SELECT COUNT(*) from Bangers').fetchone()[0]
     return 'You have ' + str(num_bangers) + ' bangers'
@@ -100,17 +94,17 @@ def count():
 
 def banger_help():
     '''Gives some quick help info for bangerBot'''
-    return 'say something with banger to get a banger.  Say add <link> to add.'''
+    return 'say something with banger to get a banger.  Say add <link> to add.'
 
 
 if __name__ == '__main__':
-    if 'iBangersBotDB.sqlite3' not in os.listdir(os.getcwd()):
+    if bangersFile() not in os.listdir(os.getcwd()):
         createDB()
 
         with open('bangers.txt') as f:
             for banger in f.readlines():
                 try:
-                    add_banger(banger, 5, False)
+                    add_banger('add ' + banger, 5)
                 except Exception as e:
                     print(e)
                     print('Banger already added')

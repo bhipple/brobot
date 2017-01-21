@@ -2,7 +2,7 @@ import sqlite3
 
 def createDB():
     '''Creates the Database, the tables, and fills in the user information.'''
-    conn = sqlite3.connect('iBangersBotDB.sqlite3')
+    conn = sqlite3.connect('brobotDB.sqlite3')
     cur = conn.cursor()
 
     cur.execute('''
@@ -33,7 +33,7 @@ def createDB():
     VALUES (?, ?)
     '''
     Names = ['Adam', 'Alex', 'Austin', 'Ben', 'Chris B.', 'Chris H.', 'Jim',
-            'John', 'Mike', 'Sean', 'Zach']
+            'John', 'Mike', 'Sean', 'Zach', 'Guest']
     for i, name in enumerate(Names):
         cur.execute(insert_sql, (i, name))
 
