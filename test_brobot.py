@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 import os
-os.environ["DARKSKYKEY"] = os.getenv("DARKSKYKEY", "Test")
-os.environ["NICKNAME"] = "Test"
-os.environ["REALNAME"] = "Test"
-os.environ["NICKNAME"] = "Test"
-os.environ["USER"] = "Test"
-os.environ["REALNAME"] = "Test"
-os.environ["IRCPASSWORD"] = "Test"
-os.environ["FBCHAN"] = "Test"
-os.environ["BANGERS_FILE"] = "test_bangers.txt"
 
+def setDefaultEnv(k):
+    os.environ[k] = os.getenv(k, "Test")
+
+def initEnv():
+    map(setDefaultEnv, ["LOCIQ", "FBCHAN", "IRCPASSWORD", "NICKNAME", "REALNAME", "USER"])
+    os.environ["BANGERS_FILE"] = "test_bangers.txt"
+
+initEnv()
 import unittest
 import brobot
 import bangers
