@@ -10,6 +10,7 @@ locvar = "&limit=1&countrycodes=US&format=json&q="
 dskyurl = "https://api.darksky.net/forecast/"
 
 def just_coord():
+    text = ""
     r = requests.get(locurl + lociq + locvar + text)
     parsed_json = json.loads(r.text)
     for i in parsed_json:

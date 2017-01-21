@@ -21,11 +21,10 @@ def initEnv():
 
 initEnv()
 import unittest
-import brobot
 import bangers
 import nerdreply
-import weather
 import re
+#import weather
 
 import codecs
 import sys

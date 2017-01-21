@@ -1,10 +1,6 @@
 #!/usr/bin/python
 import os
-import random
-import re
-import bangers
 import nerdreply
-import pdb
 from telnetlib import Telnet
 import sys
 import codecs
