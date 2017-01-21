@@ -3,22 +3,14 @@ import urllib
 import os
 import requests
 
-
 dskey = os.environ["DARKSKYKEY"]
 lociq = os.environ["LOCIQ"]
 locurl = "http://locationiq.org/v1/search.php?key="
 locvar = "&limit=1&countrycodes=US&format=json&q="
 dskyurl = "https://api.darksky.net/forecast/"
 
-#work in progress...
-
-#def handle_response():
-#    for text in text.lower():   
-#       return weather()
-
-
-def just_coord(): 
-    r = requests.get(locurl + lociq + locvar + text )  
+def just_coord():
+    r = requests.get(locurl + lociq + locvar + text)
     parsed_json = json.loads(r.text)
     for i in parsed_json:
          print "DEBUG just_coord"
@@ -27,7 +19,7 @@ def just_coord():
 
 
 def weather():
-    while True:    
+    while True:
         try:
             coord = str(just_coord())
             print "DEBUG weather"
@@ -38,7 +30,3 @@ def weather():
             return(parsed_json['daily']['summary'])
         except ValueError:
             return "Location not found, please use 'City, ST'"
-
-
-#if __name__ == '__main__':
-#    print(handle_response())
