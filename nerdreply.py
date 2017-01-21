@@ -1,14 +1,9 @@
 #!/usr/bin/python
-import os
-import random
-import re
 import bangers
-import weather
+#import weather
 import sys
 import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-import pdb
-from telnetlib import Telnet
 
 INSPIRATION = "When you're out there...partying...horswing around...someone out there at the same time is working hard. Someone is getting smarter and someone is winning, just remember that!"
 
@@ -27,7 +22,7 @@ def handlers():
 
            # Weather currently disabled due to UTF-8 issues.
            #, Handler(".*forecast*.\r\n", lambda m: weather.weather())
-            
+
 
            , Handler(".*banger count.*\r\n", lambda m: bangers.count())
            , Handler(".*banger add https.*\r\n", lambda m: bangers.add_banger(m))

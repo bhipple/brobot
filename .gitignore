@@ -3,3 +3,4 @@
 *.swp
 *.txt
 !test_bangers.txt
+!requirements.txt
