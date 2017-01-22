@@ -27,7 +27,7 @@ def just_coord(text):
          return i['lat'] + ',' +  i['lon']
 
 def weather(text):
-    try: 
+    try:
         coord = str(just_coord(text))
         coord =  coord.translate(None, ' u()')
         url = dskyurl + dskey + "/" + coord
