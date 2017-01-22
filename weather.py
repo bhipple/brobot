@@ -13,7 +13,9 @@ dskyurl = "https://api.darksky.net/forecast/"
 
 
 def encoding(text):
+    print "debug encoding"
     json = weather(text).encode('utf-8')
+    print json
     return json
 
 def just_coord(text):
