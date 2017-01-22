@@ -1,9 +1,6 @@
 #!/usr/bin/python
 import bangers
 import weather
-import pdb
-from telnetlib import Telnet
-import weather
 import sys
 import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)

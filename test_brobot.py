@@ -29,8 +29,8 @@ import weather
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-reload(sys)  
-sys.setdefaultencoding('utf8')
+#reload(sys)  
+#sys.setdefaultencoding('utf8')
 
 
 # Helper function to run all handlers in order against an input msg
