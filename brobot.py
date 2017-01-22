@@ -5,6 +5,7 @@ import re
 import bangers
 import weather
 import nerdreply
+import initDatabase
 import sys
 import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
@@ -58,7 +59,10 @@ def telnetMain():
         cleaned = cleanup(match.group(0))
         print "DEBUG: cleanedUp=" + cleaned
 
-        sendMsg(tn, nerdreply.processRequest(idx, cleaned))
+        sendMsg(tn, nerdreply.processRequest(idx, [cleaned, match.group(0)]))
 
 if __name__ == '__main__':
+    if bangersFile() not in os.listdir(os.getcwd()):
+        initDatabase.createDB()
+        initDatabase.loadFromText('bangers.txt')
     telnetMain()

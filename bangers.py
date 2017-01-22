@@ -3,11 +3,17 @@ import subprocess
 import sqlite3
 import os
 import datetime
+
+# import urllib
+# import urllib.request
+# import urllib2
+# import json
+
 from string import ascii_uppercase
 from initDatabase import createDB
 
 def bangersFile():
-    return os.environ.get('BANGERS_FILE') or '/home/brobot/brobot/brobotDB.sqlite3'
+    return os.environ.get('BANGERS_FILE') or 'brobotDB.sqlite3'
 
 
 def select_banger():
@@ -32,8 +38,7 @@ def add_banger(text, userID):
     conn = sqlite3.connect(bangersFile())
     cur = conn.cursor()
 
-    cur.execute("INSERT INTO Bangers VALUES (?, ?, ?, ?, ?, ?)", [
-                1,
+    cur.execute("INSERT INTO Bangers VALUES (?, ?, ?, ?, ?)", [
                 text,
                 'Title Placeholder',
                 userID,
@@ -44,8 +49,17 @@ def add_banger(text, userID):
     conn.close()
 
     return 'Successfully added banger'
-    # else:
-        # return "That didn't work"
+
+
+# Looks like the getdata API implementation is discontinued.
+def lookup_video_title(url):
+    '''Uses the Youtube API to lookup a video title.'''
+    videoID = url.split('watch?v=')[1]
+    api_url = 'http://gdata.youtube.com/feeds/api/videos/%s?alt=json&v=2' % videoID
+    api_response = json.load(urllib.request.urlopen(api_url))
+    print(api_response)
+
+    return api_response['entry']['title']['$t']
 
 def lookup_userID(name):
     '''Looks up the userID from the user which sent a message'''
@@ -89,6 +103,7 @@ def count():
     conn = sqlite3.connect(bangersFile())
     cur = conn.cursor()
     num_bangers = cur.execute('SELECT COUNT(*) from Bangers').fetchone()[0]
+    conn.close()
     return 'You have ' + str(num_bangers) + ' bangers'
 
 
@@ -101,7 +116,7 @@ if __name__ == '__main__':
     if bangersFile() not in os.listdir(os.getcwd()):
         createDB()
 
-        with open('bangers.txt') as f:
+        with open('test_bangers.txt') as f:
             for banger in f.readlines():
                 try:
                     add_banger('add ' + banger, 5)
@@ -110,6 +125,7 @@ if __name__ == '__main__':
                     print('Banger already added')
 
     print(select_banger())
+    # print(lookup_video_title(select_banger()))
     print(count())
     print(lookup_userID('match:ChrisHolla!'))
     print(lookup_userID('match:MikeLevy!'))

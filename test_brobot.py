@@ -8,7 +8,7 @@ os.environ["USER"] = "Test"
 os.environ["REALNAME"] = "Test"
 os.environ["IRCPASSWORD"] = "Test"
 os.environ["FBCHAN"] = "Test"
-os.environ["BANGERS_FILE"] = "test_bangers.txt"
+os.environ["BANGERS_FILE"] = "brobotDB.sqlite3"
 
 import unittest
 import brobot
@@ -55,14 +55,19 @@ class TestNerdreply(unittest.TestCase):
 class TestBangers(unittest.TestCase):
     def test_default_bangers_file(self):
         os.environ['BANGERS_FILE'] = ''
-        self.assertEqual('/home/brobot/brobot/bangers.txt', bangers.bangersFile())
-        os.environ['BANGERS_FILE'] = 'test_bangers.txt'
+        self.assertEqual('brobotDB.sqlite3', bangers.bangersFile())
+        os.environ['BANGERS_FILE'] = 'brobotDB.sqlite3'
 
     def test_override_bangers(self):
-        self.assertEqual('test_bangers.txt', bangers.bangersFile())
+        self.assertEqual('brobotDB.sqlite3', bangers.bangersFile())
 
     def test_count(self):
         self.assertEqual("You have 2 bangers", bangers.count())
+
+    def test_lookupUserID(self):
+        self.assertEqual(5, bangers.lookup_userID("ChrisH"))
+        self.assertEqual(8, bangers.lookup_userID("MikeL"))
+
 
 class TestWeather(unittest.TestCase):
     def test_nyc(self):

@@ -1,4 +1,9 @@
 import sqlite3
+import random as rand
+
+
+Names = ['Adam', 'Alex', 'Austin', 'Ben', 'Chris B.', 'Chris H.', 'Jim',
+        'John', 'Mike', 'Sean', 'Zach', 'Guest']
 
 def createDB():
     '''Creates the Database, the tables, and fills in the user information.'''
@@ -7,13 +12,12 @@ def createDB():
 
     cur.execute('''
     CREATE TABLE Bangers(
-    BangerID INT,
     URL TEXT,
     Title TEXT,
     UserID INT,
     Date TEXT,
     Plays INT,
-    UNIQUE (BangerID, URL)
+    UNIQUE (URL)
     );
     ''')
 
@@ -25,6 +29,11 @@ def createDB():
     );
     ''')
 
+    cur.execute('''
+    CREATE TABLE Quotes(
+    Author TEXT,
+    Quote TEXT);''')
+
     conn.commit()
 
     # Insert the Names
@@ -32,10 +41,19 @@ def createDB():
     UserID, Name)
     VALUES (?, ?)
     '''
-    Names = ['Adam', 'Alex', 'Austin', 'Ben', 'Chris B.', 'Chris H.', 'Jim',
-            'John', 'Mike', 'Sean', 'Zach', 'Guest']
+
     for i, name in enumerate(Names):
         cur.execute(insert_sql, (i, name))
 
     conn.commit()
     conn.close()
+
+def loadFromText(textFile):
+    '''Loads the list of bangers from the old text file.'''
+    with open(textFile) as f:
+        for banger in f.readlines():
+            try:
+                add_banger('add ' + banger, rand.randint(0, len(Names) + 1))
+            except Exception as e:
+                print(e)
+                print('Banger already added')
