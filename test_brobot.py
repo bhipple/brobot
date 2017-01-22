@@ -24,11 +24,12 @@ import unittest
 import bangers
 import nerdreply
 import re
-#import weather
+import weather
 
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+
 
 # Helper function to run all handlers in order against an input msg
 # Behaves identically to how the telnet listener will behave.
@@ -75,8 +76,14 @@ class TestBangers(unittest.TestCase):
 
 class TestWeather(unittest.TestCase):
     def test_weather(self):
-        print "Disabled for now, since the weather functions are busted."
-        #print "\nWeather in NYC: " + weather.weather()
-
+        if os.environ["DARKSKYKEY"] == "Test":
+            print "Export a valid DARKSKYKEY in order to run the weather tests."
+            return
+        print weather.encoding('!forecast "new york, ny')
+        print weather.encoding('!forecast nyc')
+        print weather.weather('!forecast "philadelphia, pa"')
+        print weather.encoding('!forecast "philadelphia, pa"')
+        print weather.encoding('!forecast "boston"')
+        print weather.ecoding("!forecast levittown, pa").encode('utf-8')
 if __name__ == "__main__":
     unittest.main()

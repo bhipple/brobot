@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import bangers
-#import weather
+import weather
 import sys
 import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
@@ -21,7 +21,7 @@ def handlers():
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
 
            # Weather currently disabled due to UTF-8 issues.
-           #, Handler(".*forecast*.\r\n", lambda m: weather.weather())
+           , Handler(".*!forecast*.\r\n", lambda m: weather.encoding(m))
 
 
            , Handler(".*banger count.*\r\n", lambda m: bangers.count())
