@@ -78,7 +78,7 @@ class TestWeather(unittest.TestCase):
     def test_weather(self):
         if os.environ["DARKSKYKEY"] == "Test":
             print "Export a valid DARKSKYKEY in order to run the weather tests."
-        return
+            return
         print weather.encoding('!forecast "new york, ny')
         print weather.encoding('!forecast nyc')
         print weather.weather('!forecast "philadelphia, pa"')
