@@ -29,7 +29,7 @@ import weather
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-#reload(sys)  
+#reload(sys) 
 #sys.setdefaultencoding('utf8')
 
 

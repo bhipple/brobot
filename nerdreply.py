@@ -21,7 +21,7 @@ def handlers():
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
 
            # Weather currently disabled due to UTF-8 issues.
-           , Handler(".*!forecast*.\r\n", lambda m: weather.weather(m))
+           , Handler(".*!forecast*.\r\n", lambda m: weather.encoding(m))
 
 
            , Handler(".*banger count.*\r\n", lambda m: bangers.count())
