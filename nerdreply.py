@@ -4,6 +4,10 @@ import weather
 import sys
 import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 
 INSPIRATION = "When you're out there...partying...horswing around...someone out there at the same time is working hard. Someone is getting smarter and someone is winning, just remember that!"
 
