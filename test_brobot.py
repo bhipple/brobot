@@ -77,14 +77,7 @@ class TestBangers(unittest.TestCase):
         self.assertEqual("You have 2 bangers", bangers.count())
 
 class TestWeather(unittest.TestCase):
-    def test_weather(self): 
-        
-        #print weather.just_coord("![Ff]orecast nyc")
-        #print weather.just_coord("![Ff]orecast 'philadelphia, pa")
-        #print weather.just_coord("![Ff]orecast levittown, pa")
-        #print weather.weather("!forecast nyc")
-        #print weather.weather("!forecast nyc")
-        
+    def test_weather(self):
         print weather.weather('!forecast "new york, ny')
         print weather.weather('!forecast nyc')
         print weather.weather('!forecast "philadelphia, pa"')

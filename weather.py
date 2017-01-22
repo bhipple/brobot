@@ -26,9 +26,9 @@ def just_coord(text):
     for i in parsed_json:
          return i['lat'] + ',' +  i['lon']
 
-def weather(text): 
-        try:    
-            coord = str(just_coord(text)) 
+def weather(text):
+        try: 
+            coord = str(just_coord(text))
             coord =  coord.translate(None, ' u()')
             url = dskyurl + dskey + "/" + coord
             response = urllib.urlopen(url)
@@ -36,6 +36,3 @@ def weather(text):
             return (parsed_json['daily']['summary'])
         except ValueError:
             return 'Please use format: "City, St"'
-
-
-
