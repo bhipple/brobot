@@ -76,11 +76,14 @@ class TestBangers(unittest.TestCase):
 
 class TestWeather(unittest.TestCase):
     def test_weather(self):
-        print weather.weather('!forecast "new york, ny')
-        print weather.weather('!forecast nyc')
+        if os.environ["DARKSKYKEY"] == "Test":
+            print "Export a valid DARKSKYKEY in order to run the weather tests."
+        return
+        print weather.encoding('!forecast "new york, ny')
+        print weather.encoding('!forecast nyc')
         print weather.weather('!forecast "philadelphia, pa"')
         print weather.encoding('!forecast "philadelphia, pa"')
-        print weather.weather('!forecast "boston"')
-        print weather.weather("!forecast levittown, pa").encode('utf-8')
+        print weather.encoding('!forecast "boston"')
+        print weather.ecoding("!forecast levittown, pa").encode('utf-8')
 if __name__ == "__main__":
     unittest.main()
