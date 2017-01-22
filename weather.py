@@ -3,7 +3,6 @@ import urllib
 import os
 import re
 import requests
-import codecs
 
 
 dskey = os.environ["DARKSKYKEY"]
