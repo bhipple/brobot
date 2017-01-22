@@ -1,25 +1,37 @@
 #!/usr/bin/env python
 import os
-os.environ["DARKSKYKEY"] = os.getenv("DARKSKYKEY", "Test")
-os.environ["NICKNAME"] = "Test"
-os.environ["REALNAME"] = "Test"
-os.environ["NICKNAME"] = "Test"
-os.environ["USER"] = "Test"
-os.environ["REALNAME"] = "Test"
-os.environ["IRCPASSWORD"] = "Test"
-os.environ["FBCHAN"] = "Test"
-os.environ["BANGERS_FILE"] = "test_bangers.txt"
 
+requiredEnv = [
+      "BANGERS_FILE"
+    , "DARKSKYKEY"
+    , "FBCHAN"
+    , "IRCPASSWORD"
+    , "LOCIQ"
+    , "NICKNAME"
+    , "REALNAME"
+    , "USER"
+]
+
+def setDefaultEnv(k):
+    os.environ[k] = os.getenv(k, "Test")
+
+def initEnv():
+    os.environ["BANGERS_FILE"] = "test_bangers.txt"
+    map(setDefaultEnv, requiredEnv)
+
+initEnv()
 import unittest
-import brobot
 import bangers
 import nerdreply
-import weather
 import re
+import weather
 
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+reload(sys)  
+sys.setdefaultencoding('utf8')
+
 
 # Helper function to run all handlers in order against an input msg
 # Behaves identically to how the telnet listener will behave.
@@ -65,8 +77,19 @@ class TestBangers(unittest.TestCase):
         self.assertEqual("You have 2 bangers", bangers.count())
 
 class TestWeather(unittest.TestCase):
-    def test_nyc(self):
-        print "\nWeather in NYC: " + weather.nyc_weather()
-
+    def test_weather(self): 
+        
+        #print weather.just_coord("![Ff]orecast nyc")
+        #print weather.just_coord("![Ff]orecast 'philadelphia, pa")
+        #print weather.just_coord("![Ff]orecast levittown, pa")
+        #print weather.weather("!forecast nyc")
+        #print weather.weather("!forecast nyc")
+        
+        print weather.weather('!forecast "new york, ny')
+        print weather.weather('!forecast nyc')
+        print weather.weather('!forecast "philadelphia, pa"')
+        print weather.encoding('!forecast "philadelphia, pa"')
+        print weather.weather('!forecast "boston"')
+        print weather.weather("!forecast levittown, pa").encode('utf-8')
 if __name__ == "__main__":
     unittest.main()
