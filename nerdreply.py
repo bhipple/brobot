@@ -36,8 +36,8 @@ def handlers():
            , Handler(".*banger help.*\r\n", lambda m: bangers.banger_help())
 
            # Since this is a default, it has to be after the other banger cmds
-           , Handler(".*banger.*\r\n", lambda m: bangers.select_banger())]
-
+           , Handler(".*banger.*\r\n", lambda m: bangers.select_banger())
+           ]
 def regexes():
     return map(lambda h: h.regex, handlers())
 
