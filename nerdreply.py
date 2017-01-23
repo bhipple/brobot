@@ -29,8 +29,7 @@ def handlers():
            , Handler(".*!forecast.*\r\n", lambda m: weather.encoding(m))
 
            #Dice roll
-           , Handler(".d20.*\r\n", lambda m: dice.rollin())
-           
+           , Handler(".d20.*\r\n", lambda m: dice.rollin()
            #Droppin' bangers
            , Handler(".*banger count.*\r\n", lambda m: bangers.count())
            , Handler(".*banger add https.*\r\n", lambda m: bangers.add_banger(m))
