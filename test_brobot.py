@@ -25,7 +25,7 @@ import bangers
 import nerdreply
 import re
 import weather
-
+import dice
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
@@ -85,5 +85,9 @@ class TestWeather(unittest.TestCase):
         print weather.encoding('!forecast "philadelphia, pa"')
         print weather.encoding('!forecast "boston"')
         print weather.ecoding("!forecast levittown, pa").encode('utf-8')
+
+class TestD20(unittest.TestCase):\
+        print dice.rollin('!d20')
+
 if __name__ == "__main__":
     unittest.main()
