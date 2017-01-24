@@ -24,7 +24,6 @@ import unittest
 import bangers
 import nerdreply
 import re
-import weather
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
