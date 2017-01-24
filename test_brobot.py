@@ -24,7 +24,6 @@ import unittest
 import bangers
 import nerdreply
 import re
-import weather
 import dice
 import codecs
 import sys
@@ -76,15 +75,14 @@ class TestBangers(unittest.TestCase):
 
 class TestWeather(unittest.TestCase):
     def test_weather(self):
-        if os.environ["DARKSKYKEY"] == "Test":
-            print "Export a valid DARKSKYKEY in order to run the weather tests."
+        if os.environ["DARKSKYKEY"] == "Test" or os.environ["LOCIQ"] == "Test":
+            print "Export a valid DARKSKYKEY and LOCIQ in order to run the weather tests."
             return
-        print weather.encoding('!forecast "new york, ny')
-        print weather.encoding('!forecast nyc')
-        print weather.weather('!forecast "philadelphia, pa"')
-        print weather.encoding('!forecast "philadelphia, pa"')
-        print weather.encoding('!forecast "boston"')
-        print weather.ecoding("!forecast levittown, pa").encode('utf-8')
+
+        print runHandlers('!forecast "new york, ny"')
+        print runHandlers('!forecast "philadelphia, pa"')
+        print runHandlers('!forecast "boston"')
+        print runHandlers('!forecast "levittown, pa"')
 
 class TestD20(unittest.TestCase):
         print dice.rollin('!d20')
