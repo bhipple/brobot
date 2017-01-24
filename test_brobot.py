@@ -86,7 +86,7 @@ class TestWeather(unittest.TestCase):
         print weather.encoding('!forecast "boston"')
         print weather.ecoding("!forecast levittown, pa").encode('utf-8')
 
-class TestD20(unittest.TestCase):\
+class TestD20(unittest.TestCase):
         print dice.rollin('!d20')
 
 if __name__ == "__main__":
