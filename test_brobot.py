@@ -24,7 +24,6 @@ import unittest
 import bangers
 import nerdreply
 import re
-import dice
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
@@ -39,13 +38,6 @@ def runHandlers(msg, hndlrs = nerdreply.handlers()):
             return h.func(msg)
 
 class TestNerdreply(unittest.TestCase):
-    def test_regex_list(self):
-        r = nerdreply.regexes()
-        self.assertEqual(".*[Nn]erd.*\r\n", r[0])
-
-    def test_lambda_lookup_works(self):
-        hndlrs = nerdreply.handlers()
-        self.assertEqual("nerd", hndlrs[0].func("unused"))
 
     def test_none(self):
         self.assertEqual(None, runHandlers("This does not match anything."))
@@ -60,8 +52,19 @@ class TestNerdreply(unittest.TestCase):
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horsing around man!"))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horswing around man!"))
 
+    def test_d20(self):
+        x = runHandlers("Yo give me a d20")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 20)
+
+        x = runHandlers("Yo nerdbot drop me a d20")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 20)
 
 class TestBangers(unittest.TestCase):
+
     def test_default_bangers_file(self):
         os.environ['BANGERS_FILE'] = ''
         self.assertEqual('/home/brobot/brobot/bangers.txt', bangers.bangersFile())
@@ -84,8 +87,6 @@ class TestWeather(unittest.TestCase):
         print runHandlers('!forecast "boston"')
         print runHandlers('!forecast "levittown, pa"')
 
-class TestD20(unittest.TestCase):
-        print dice.rollin('!d20')
 
 if __name__ == "__main__":
     unittest.main()

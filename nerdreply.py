@@ -22,15 +22,14 @@ class Handler():
 # business logic. Note that while some functions do not require an argument,
 # it's simpler to just pass the unused message in.
 def handlers():
-    return [ Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
+    return [ Handler(".*[Dd]20.*\r\n", lambda m: dice.rollin())
+           , Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
            , Handler(".*[Dd]ale.*\r\n", lambda m: "daaale")
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
 
            # Weather currently disabled due to UTF-8 issues.
            , Handler(".*!forecast.*\r\n", lambda m: weather.encoding(m))
 
-           #Dice roll
-           , Handler(".d20.*\r\n", lambda m: dice.rollin())
            #Droppin' bangers
            , Handler(".*banger count.*\r\n", lambda m: bangers.count())
            , Handler(".*banger add https.*\r\n", lambda m: bangers.add_banger(m))

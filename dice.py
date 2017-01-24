@@ -1,5 +1,6 @@
 import random
 
 
-def rollin(m):
-    return random.randint(1,20)
+def rollin():
+    roll = random.randint(1,20)
+    return str(roll)
