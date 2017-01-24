@@ -63,7 +63,7 @@ class TestNerdreply(unittest.TestCase):
         self.assertTrue(isinstance(x, str))
         i = int(x)
         self.assertTrue(i >= 0 and i <= 20)
- 
+
 class TestBangers(unittest.TestCase):
 
     def test_default_bangers_file(self):
