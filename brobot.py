@@ -16,7 +16,6 @@ fbchan = os.environ["FBCHAN"]
 dskey = os.environ["DARKSKYKEY"]
 
 
-
 def sendMsg(tn, msg):
     if not msg:
         return
@@ -32,7 +31,7 @@ def telnetMain():
     tn.set_debuglevel(5)
     tn.read_until("BitlBee-IRCd initialized, please go on")
 
-    tn.write("NICK " + nickname +"\n")
+    tn.write("NICK " + nickname + "\n")
     tn.write("USER " + username + " 8 *: " + realname + "\n")
     tn.read_until("identify yourself", 3)
 

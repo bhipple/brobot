@@ -3,9 +3,10 @@ with import <nixpkgs> {}; {
     name = "py";
     buildInputs = [ stdenv
                     python27Full
-                    python27Packages.coveralls
-                    python27Packages.requests
                     python27Packages.pyflakes
+                    python27Packages.pep8
+                    python27Packages.pylint
+                    python27Packages.requests
                   ];
   };
 }

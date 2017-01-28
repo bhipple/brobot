@@ -10,7 +10,6 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 
-
 INSPIRATION = "When you're out there...partying...horswing around...someone out there at the same time is working hard. Someone is getting smarter and someone is winning, just remember that!"
 
 class Handler():
@@ -30,7 +29,7 @@ def handlers():
            # Weather currently disabled due to UTF-8 issues.
            , Handler(".*!forecast.*\r\n", lambda m: weather.encoding(m))
 
-           #Droppin' bangers
+           # Droppin' bangers
            , Handler(".*banger count.*\r\n", lambda m: bangers.count())
            , Handler(".*banger add https.*\r\n", lambda m: bangers.add_banger(m))
            , Handler(".*banger help.*\r\n", lambda m: bangers.banger_help())
