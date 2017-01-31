@@ -122,7 +122,7 @@ class TestBangers(unittest.TestCase):
 
     def test_add_redundent(self):
         self.assertEqual("Failed to add banger.",
-                bangers.add_banger('banger add https://www.youtube.com/watch?v=ifi6SqAAH7s'))
+                bangers.add_banger('banger add https://www.youtube.com/watch?v=2HQaBWziYvY'))
 
 class TestWeather(unittest.TestCase):
     def test_weather(self):
