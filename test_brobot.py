@@ -86,7 +86,7 @@ class TestBangers(unittest.TestCase):
         with open('test_bangers.txt') as f:
             for banger in f.readlines():
                 try:
-                    banger.add_banger('add ' + banger, 5)
+                    bangers.add_banger('add ' + banger, 5)
                 except Exception as e:
                     print(e)
                     print('Banger already added')
