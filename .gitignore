@@ -2,5 +2,6 @@
 *.pyc
 *.swp
 *.txt
+*.sqlite3
 !test_bangers.txt
 !requirements.txt
