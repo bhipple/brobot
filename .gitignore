@@ -1,4 +1,6 @@
+*.html
 *.pyc
 *.swp
-bangers.txt
-*.sqlite3
+*.txt
+!test_bangers.txt
+!requirements.txt

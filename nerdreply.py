@@ -6,12 +6,16 @@ import bangers
 import weather
 import sys
 import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 import pdb
 from telnetlib import Telnet
 import sys
 import codecs
+import dice
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+
+# Python2 garbage
+# sys.setdefaultencoding("utf-8")
+
 
 INSPIRATION = "When you're out there...partying...horswing around...someone out there at the same time is working hard. Someone is getting smarter and someone is winning, just remember that!"
 
@@ -24,25 +28,26 @@ class Handler():
 # business logic. Note that while some functions do not require an argument,
 # it's simpler to just pass the unused message in.
 def handlers():
-    return [ Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
+    return [ Handler(".*[Dd]20.*\r\n", lambda m: dice.rollin())
+           , Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
            , Handler(".*[Dd]ale.*\r\n", lambda m: "daaale")
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
 
            # Weather currently disabled due to UTF-8 issues.
            #, Handler(".*philly*.\r\n", lambda m: weather.philly_weather())
            #, Handler(".*nyc*.\r\n", lambda m: weather.nyc_weather())
-
+           , Handler(".*!forecast.*\r\n", lambda m: weather.encoding(m))
+           #Droppin' bangers
            , Handler(".*banger count.*\r\n", lambda m: bangers.count())
            , Handler(".*banger add https.*\r\n", lambda m: bangers.add_banger(m))
            , Handler(".*banger help.*\r\n", lambda m: bangers.banger_help())
-
            # Since this is a default, it has to be after the other banger cmds
            , Handler(".*banger.\r\n", lambda m: bangers.select_banger())
-
+           , Handler(".*banger.*\r\n", lambda m: bangers.select_banger())
            ]
 
 def regexes():
-    return map(lambda h: h.regex, handlers())
+    return list(map(lambda h: h.regex, handlers()))
 
 def processRequest(idx, inp):
     return handlers()[idx].func(inp)

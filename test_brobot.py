@@ -9,20 +9,46 @@ os.environ["REALNAME"] = "Test"
 os.environ["IRCPASSWORD"] = "Test"
 os.environ["FBCHAN"] = "Test"
 os.environ["BANGERS_FILE"] = "brobotDB.sqlite3"
+os.environ["LOCIQ"] = "Test"
 
 import unittest
 import brobot
 import bangers
 import nerdreply
-import weather
+# import weather
 import re
 
+requiredEnv = [
+      "BANGERS_FILE"
+    , "DARKSKYKEY"
+    , "FBCHAN"
+    , "IRCPASSWORD"
+    , "LOCIQ"
+    , "NICKNAME"
+    , "REALNAME"
+    , "USER"
+]
+
+def setDefaultEnv(k):
+    os.environ[k] = os.getenv(k, "Test")
+
+def initEnv():
+    os.environ["BANGERS_FILE"] = "brobotDB.sqlite3"
+    map(setDefaultEnv, requiredEnv)
+
+initEnv()
+
+import unittest
+import bangers
+import nerdreply
+import re
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 # Helper function to run all handlers in order against an input msg
 # Behaves identically to how the telnet listener will behave.
+
 def runHandlers(msg, hndlrs = nerdreply.handlers()):
     msg += "\r\n"
     for h in hndlrs:
@@ -30,13 +56,6 @@ def runHandlers(msg, hndlrs = nerdreply.handlers()):
             return h.func(msg)
 
 class TestNerdreply(unittest.TestCase):
-    def test_regex_list(self):
-        r = nerdreply.regexes()
-        self.assertEqual(".*[Nn]erd.*\r\n", r[0])
-
-    def test_lambda_lookup_works(self):
-        hndlrs = nerdreply.handlers()
-        self.assertEqual("nerd", hndlrs[0].func("unused"))
 
     def test_none(self):
         self.assertEqual(None, runHandlers("This does not match anything."))
@@ -51,15 +70,38 @@ class TestNerdreply(unittest.TestCase):
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horsing around man!"))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horswing around man!"))
 
+    def test_d20(self):
+        x = runHandlers("Yo give me a d20")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 20)
+
+        x = runHandlers("Yo nerdbot drop me a d20")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 20)
+
 
 class TestBangers(unittest.TestCase):
+
     def test_default_bangers_file(self):
         os.environ['BANGERS_FILE'] = ''
-        self.assertEqual('brobotDB.sqlite3', bangers.bangersFile())
+        self.assertEqual('/home/brobot/brobot/brobotDB.sqlite3', bangers.bangersFile())
         os.environ['BANGERS_FILE'] = 'brobotDB.sqlite3'
 
     def test_override_bangers(self):
         self.assertEqual('brobotDB.sqlite3', bangers.bangersFile())
+
+    def test_d20(self):
+        x = runHandlers("Yo give me a d20")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 20)
+
+        x = runHandlers("Yo nerdbot drop me a d20")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 20)
 
     def test_count(self):
         self.assertEqual("You have 2 bangers", bangers.count())
@@ -68,10 +110,20 @@ class TestBangers(unittest.TestCase):
         self.assertEqual(5, bangers.lookup_userID("ChrisH"))
         self.assertEqual(8, bangers.lookup_userID("MikeL"))
 
+    def test_getBanger(self):
+        self.assertTrue('youtube' in bangers.select_banger())
 
 class TestWeather(unittest.TestCase):
-    def test_nyc(self):
-        print "\nWeather in NYC: " + weather.nyc_weather()
+    def test_weather(self):
+        if os.environ["DARKSKYKEY"] == "Test" or os.environ["LOCIQ"] == "Test":
+            print("Export a valid DARKSKYKEY and LOCIQ in order to run the weather tests.")
+            return
+
+            print(runHandlers('!forecast "new york, ny"'))
+            print(runHandlers('!forecast "philadelphia, pa"'))
+            print(runHandlers('!forecast "boston"'))
+            print(runHandlers('!forecast "levittown, pa"'))
+
 
 if __name__ == "__main__":
     unittest.main()

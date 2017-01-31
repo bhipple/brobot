@@ -1,20 +1,12 @@
 import random
-import subprocess
-import sqlite3
 import os
 import datetime
-
-# import urllib
-# import urllib.request
-# import urllib2
-# import json
-
+import sqlite3
 from string import ascii_uppercase
 from initDatabase import createDB
 
 def bangersFile():
-    return os.environ.get('BANGERS_FILE') or 'brobotDB.sqlite3'
-
+    return os.environ.get('BANGERS_FILE') or '/home/brobot/brobot/brobotDB.sqlite3'
 
 def select_banger():
     '''Returns a random banger from the database'''
@@ -25,11 +17,16 @@ def select_banger():
     conn.close()
     return url[0]
 
+def load_bangers():
+    '''Loads the bangers from the text file'''
+    with open(bangersFile()) as f:
+        bangers = [banger.replace('\n','') for banger in f.readlines()]
+    return bangers
 
 def add_banger(text, userID):
     '''
     Adds a banger to the text file.
-    proper input would be "add link"
+    proper input would be "add <link>"
     '''
     # Strips input text to just be the url
     text = text.split('add')[1].replace(' ', '').strip()
@@ -50,16 +47,6 @@ def add_banger(text, userID):
 
     return 'Successfully added banger'
 
-
-# Looks like the getdata API implementation is discontinued.
-def lookup_video_title(url):
-    '''Uses the Youtube API to lookup a video title.'''
-    videoID = url.split('watch?v=')[1]
-    api_url = 'http://gdata.youtube.com/feeds/api/videos/%s?alt=json&v=2' % videoID
-    api_response = json.load(urllib.request.urlopen(api_url))
-    print(api_response)
-
-    return api_response['entry']['title']['$t']
 
 def lookup_userID(name):
     '''Looks up the userID from the user which sent a message'''
@@ -125,7 +112,6 @@ if __name__ == '__main__':
                     print('Banger already added')
 
     print(select_banger())
-    # print(lookup_video_title(select_banger()))
     print(count())
     print(lookup_userID('match:ChrisHolla!'))
     print(lookup_userID('match:MikeLevy!'))

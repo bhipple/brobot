@@ -1,0 +1,8 @@
+language: python
+python:
+  - "2.7"
+install: "pip install -r requirements.txt pyflakes"
+script:
+  - bash lint.sh
+  - pyflakes *.py
+  - python test_brobot.py

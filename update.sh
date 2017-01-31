@@ -9,6 +9,7 @@ remote=$(git log origin/master --pretty=%H)
 
 if ! [ "$current" = "$remote" ]; then
     git pull origin master
+    pip install -r requirements.txt
     echo "Updated nerdbot to git sha $remote at $(date)"
     sudo service nerdbot restart
 fi
