@@ -82,14 +82,7 @@ class TestBangers(unittest.TestCase):
     # Create the bangers file
     if bangers.bangersFile() not in os.listdir(os.getcwd()):
         initDatabase.createDB()
-
-        with open('test_bangers.txt') as f:
-            for banger in f.readlines():
-                try:
-                    bangers.add_banger('add ' + banger, 5)
-                except Exception as e:
-                    print(e)
-                    print('Banger already added')
+        bangers.loadFromText('test_bangers.txt')
 
     def test_default_bangers_file(self):
         os.environ['BANGERS_FILE'] = ''
