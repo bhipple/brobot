@@ -91,8 +91,6 @@ class TestBangers(unittest.TestCase):
                     print(e)
                     print('Banger already added')
 
-
-
     def test_default_bangers_file(self):
         os.environ['BANGERS_FILE'] = ''
         self.assertEqual('/home/brobot/brobot/brobotDB.sqlite3', bangers.bangersFile())
