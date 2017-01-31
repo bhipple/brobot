@@ -65,7 +65,7 @@ def telnetMain():
         sendMsg(tn, nerdreply.processRequest(idx, [cleaned, match.group(0)]))
 
 if __name__ == '__main__':
-    if bangersFile() not in os.listdir(os.getcwd()):
+    if bangers.bangersFile() not in os.listdir(os.getcwd()):
         initDatabase.createDB()
         initDatabase.loadFromText('test_bangers.txt')
         initDatabase.loadFromText('bangers.txt')
