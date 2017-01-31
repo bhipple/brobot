@@ -26,8 +26,8 @@ def handlers():
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
 
            # Weather currently disabled due to UTF-8 issues.
-           #, Handler(".*philly*.\r\n", lambda m: weather.philly_weather())
-           #, Handler(".*nyc*.\r\n", lambda m: weather.nyc_weather())
+           # , Handler(".*philly*.\r\n", lambda m: weather.philly_weather())
+           # , Handler(".*nyc*.\r\n", lambda m: weather.nyc_weather())
            , Handler(".*!forecast.*\r\n", lambda m: weather.encoding(m))
 
            # Droppin' bangers

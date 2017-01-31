@@ -39,7 +39,7 @@ def add_banger(text):
     cur.execute("INSERT INTO Bangers VALUES (?, ?, ?, ?, ?)", [
                 text,
                 'Title Placeholder',
-                random.randint(0,10),
+                random.randint(0, 10),
                 datetime.datetime.now(),
                 0])
 
@@ -54,7 +54,7 @@ def lookup_userID(name):
 
     # normally split in the nerdreply script.
     if __name__ == '__main__':
-        name =  name.split(':')[1].split('!')[0]
+        name = name.split(':')[1].split('!')[0]
 
     # Why are we friends with two Chris?
     if 'Chris' in name:
@@ -77,7 +77,7 @@ def lookup_userID(name):
     cur = conn.cursor()
 
     cur.execute('SELECT UserID FROM Users WHERE Name = ?', (name,))
-    userID =  cur.fetchone()[0]
+    userID = cur.fetchone()[0]
 
     if userID is None:
         userID = '11'
