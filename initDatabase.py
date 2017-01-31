@@ -1,6 +1,4 @@
 import sqlite3
-import random as rand
-
 
 Names = ['Adam', 'Alex', 'Austin', 'Ben', 'Chris B.', 'Chris H.', 'Jim',
         'John', 'Mike', 'Sean', 'Zach', 'Guest']
