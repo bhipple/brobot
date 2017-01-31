@@ -12,7 +12,6 @@ os.environ["BANGERS_FILE"] = "brobotDB.sqlite3"
 os.environ["LOCIQ"] = "Test"
 
 import unittest
-import brobot
 import bangers
 import nerdreply
 # import weather
@@ -37,10 +36,6 @@ def initEnv():
 
 initEnv()
 
-import unittest
-import bangers
-import nerdreply
-import re
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)

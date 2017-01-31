@@ -1,5 +1,6 @@
 import sqlite3
 import random as rand
+import bangers
 
 
 Names = ['Adam', 'Alex', 'Austin', 'Ben', 'Chris B.', 'Chris H.', 'Jim',
@@ -53,7 +54,7 @@ def loadFromText(textFile):
     with open(textFile) as f:
         for banger in f.readlines():
             try:
-                add_banger('add ' + banger, rand.randint(0, len(Names) + 1))
+                bangers.add_banger('add ' + banger, rand.randint(0, len(Names) + 1))
             except Exception as e:
                 print(e)
                 print('Banger already added')
