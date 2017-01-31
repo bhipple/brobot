@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 import os
 
-requiredEnv = [
-      "BANGERS_FILE"
-    , "DARKSKYKEY"
-    , "FBCHAN"
-    , "IRCPASSWORD"
-    , "LOCIQ"
-    , "NICKNAME"
-    , "REALNAME"
-    , "USER"
-]
+requiredEnv = ["BANGERS_FILE"
+              , "DARKSKYKEY"
+              , "FBCHAN"
+              , "IRCPASSWORD"
+              , "LOCIQ"
+              , "NICKNAME"
+              , "REALNAME"
+              , "USER"
+              ]
 
 def setDefaultEnv(k):
     os.environ[k] = os.getenv(k, "Test")
@@ -31,7 +30,7 @@ sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 # Helper function to run all handlers in order against an input msg
 # Behaves identically to how the telnet listener will behave.
-def runHandlers(msg, hndlrs = nerdreply.handlers()):
+def runHandlers(msg, hndlrs=nerdreply.handlers()):
     msg += "\r\n"
     for h in hndlrs:
         if re.match(h.regex, msg):

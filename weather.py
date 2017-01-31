@@ -24,12 +24,12 @@ def just_coord(text):
     r = requests.get(locurl + lociq + locvar + text)
     parsed_json = json.loads(r.text)
     for i in parsed_json:
-         return i['lat'] + ',' +  i['lon']
+        return i['lat'] + ',' + i['lon']
 
 def weather(text):
     try:
         coord = str(just_coord(text))
-        coord =  coord.translate(None, ' u()')
+        coord = coord.translate(None, ' u()')
         url = dskyurl + dskey + "/" + coord
         response = urllib.urlopen(url)
         parsed_json = json.loads(response.read())
