@@ -98,7 +98,7 @@ class TestBangers(unittest.TestCase):
         self.assertTrue(i >= 0 and i <= 20)
 
     def test_count(self):
-        self.assertEqual("You have 2 bangers", bangers.count())
+        self.assertTrue("You have" in bangers.count())
 
     def test_lookupUserID(self):
         self.assertEqual(5, bangers.lookup_userID("ChrisH"))
@@ -106,6 +106,10 @@ class TestBangers(unittest.TestCase):
 
     def test_getBanger(self):
         self.assertTrue('youtube' in bangers.select_banger())
+
+    def test_add_redundent(self):
+        self.assertEqual("Failed to add banger.",
+                bangers.add_banger('banger add https://www.youtube.com/watch?v=ifi6SqAAH7s'))
 
 class TestWeather(unittest.TestCase):
     def test_weather(self):
