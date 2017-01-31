@@ -20,7 +20,7 @@ def select_banger():
 def load_bangers():
     '''Loads the bangers from the text file'''
     with open(bangersFile()) as f:
-        bangers = [banger.replace('\n','') for banger in f.readlines()]
+        bangers = [banger.replace('\n', '') for banger in f.readlines()]
     return bangers
 
 def add_banger(text, userID):
