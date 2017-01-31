@@ -1,13 +1,6 @@
 #!/usr/bin/python
-import os
-import random
-import re
 import bangers
 import weather
-import sys
-import codecs
-import pdb
-from telnetlib import Telnet
 import sys
 import codecs
 import dice

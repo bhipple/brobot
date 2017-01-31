@@ -7,6 +7,7 @@ from initDatabase import createDB
 
 def bangersFile():
     return os.environ.get('BANGERS_FILE') or '/home/brobot/brobot/brobotDB.sqlite3'
+    # return '/home/devbot/devbrobot/brobotDB.sqlite3'
 
 def select_banger():
     '''Returns a random banger from the database'''
@@ -23,7 +24,7 @@ def load_bangers():
         bangers = [banger.replace('\n', '') for banger in f.readlines()]
     return bangers
 
-def add_banger(text, userID):
+def add_banger(text):
     '''
     Adds a banger to the text file.
     proper input would be "add <link>"
@@ -38,7 +39,7 @@ def add_banger(text, userID):
     cur.execute("INSERT INTO Bangers VALUES (?, ?, ?, ?, ?)", [
                 text,
                 'Title Placeholder',
-                userID,
+                random.randint(0,10),
                 datetime.datetime.now(),
                 0])
 

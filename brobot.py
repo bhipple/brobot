@@ -1,20 +1,10 @@
 #!/usr/bin/python
 import os
-import random
-import re
-import bangers
-import weather
 import nerdreply
-import initDatabase
 import sys
 import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-import pdb
-import nerdreply
 from telnetlib import Telnet
-import sys
-import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 # Configuration
 channel = "&bitlebee"
@@ -62,11 +52,7 @@ def telnetMain():
         cleaned = cleanup(match.group(0))
         print("DEBUG: cleanedUp=" + cleaned)
 
-        sendMsg(tn, nerdreply.processRequest(idx, [cleaned, match.group(0)]))
+        sendMsg(tn, nerdreply.processRequest(idx, cleaned))
 
 if __name__ == '__main__':
-    if bangers.bangersFile() not in os.listdir(os.getcwd()):
-        initDatabase.createDB()
-        initDatabase.loadFromText('test_bangers.txt')
-        initDatabase.loadFromText('bangers.txt')
-        sendMsg(tn, nerdreply.processRequest(idx, cleaned))
+    telnetMain()
