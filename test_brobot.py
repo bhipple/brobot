@@ -113,6 +113,14 @@ class TestBangers(unittest.TestCase):
     def test_getBanger(self):
         self.assertTrue('youtube' in bangers.select_banger())
 
+    def test_getBangerLowercase(self):
+        x = runHandlers("Drop a banger")
+        self.assertTrue("youtube" in x)
+
+    def test_getBangerUppcercase(self):
+        x = runHandlers("Drop a Banger")
+        self.assertTrue("youtube" in x)
+
     def test_add_redundent(self):
         self.assertEqual("Failed to add banger.",
                 bangers.add_banger('banger add https://www.youtube.com/watch?v=2HQaBWziYvY'))

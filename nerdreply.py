@@ -31,12 +31,11 @@ def handlers():
            , Handler(".*!forecast.*\r\n", lambda m: weather.encoding(m))
 
            # Droppin' bangers
-           , Handler(".*banger count.*\r\n", lambda m: bangers.count())
-           , Handler(".*banger add https.*\r\n", lambda m: bangers.add_banger(m))
-           , Handler(".*banger help.*\r\n", lambda m: bangers.banger_help())
+           , Handler(".*[Bb]anger count.*\r\n", lambda m: bangers.count())
+           , Handler(".*[Bb]anger add https.*\r\n", lambda m: bangers.add_banger(m))
+           , Handler(".*[Bb]anger help.*\r\n", lambda m: bangers.banger_help())
            # Since this is a default, it has to be after the other banger cmds
-           , Handler(".*banger.\r\n", lambda m: bangers.select_banger())
-           , Handler(".*banger.*\r\n", lambda m: bangers.select_banger())
+           , Handler(".*[Bb]anger.*\r\n", lambda m: bangers.select_banger())
            ]
 
 def regexes():
