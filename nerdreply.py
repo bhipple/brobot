@@ -5,6 +5,10 @@ import sys
 import codecs
 import dice
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 
 # Python2 garbage
 # sys.setdefaultencoding("utf-8")
