@@ -8,5 +8,5 @@ def rollOff(text):
     rolls = []
     for name in text.split()[1:]:
         rolls += [(rollin(), name)]
-    res = map(lambda (r, p): p + ": " + str(r), sorted(rolls))
+    res = map(lambda (r, p): p + ": " + str(r), sorted(rolls, reverse=True))
     return "\r\n".join(res)
