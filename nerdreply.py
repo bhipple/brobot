@@ -7,7 +7,6 @@ import dice
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 import sys
 reload(sys)
-import rolloff
 sys.setdefaultencoding("utf-8")
 
 
@@ -41,7 +40,7 @@ def handlers():
            , Handler(".*[Bb]anger help.*\r\n", lambda m: bangers.banger_help())
            # Since this is a default, it has to be after the other banger cmds
            , Handler(".*[Bb]anger.*\r\n", lambda m: bangers.select_banger())
-           , Handler(".*[Rr]olloff.*\r\n", lambda m: rolloff.rollOff(m))
+           , Handler(".*[Rr]olloff.*\r\n", lambda m: dice.rollOff(m))
            ]
 
 def regexes():
