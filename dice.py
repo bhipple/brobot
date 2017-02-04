@@ -9,6 +9,6 @@ def rollin():
 def rollOff(text):
     '''Does a rolloff for the listed bros'''
     result = ""
-    for name in text.replace("\r\n","").split(" ")[1:]:
-        result += name + " " + rollin() + "\n"
+    for name in text.split()[1:]:
+        result += name + " " + rollin() + "\r\n"
     return result

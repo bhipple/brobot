@@ -134,7 +134,7 @@ class Rolloff(unittest.TestCase):
         numBros = 3
         count = 0
         for line in output.split("\n")[0:-1]:
-            self.assertTrue(int(line.split(" ")[1]) in range(1,21))
+            self.assertTrue(int(line.split(" ")[1]) in range(1, 21))
             count += 1
         self.assertEqual(numBros, count)
 
