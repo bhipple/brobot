@@ -1,14 +1,12 @@
 import random
 
 def rollin():
-    roll = random.randint(1, 20)
-    return str(roll)
+    return random.randint(1, 20)
 
-
-# matchcase passes rolloff Ben Chris Alex
 def rollOff(text):
     '''Does a rolloff for the listed bros'''
-    result = ""
+    rolls = []
     for name in text.split()[1:]:
-        result += name + " " + rollin() + "\r\n"
-    return result
+        rolls += [(rollin(), name)]
+    res = map(lambda (r,p): p + ": " + str(r), sorted(rolls))
+    return "\r\n".join(res)
