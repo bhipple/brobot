@@ -52,7 +52,9 @@ def telnetMain():
         cleaned = cleanup(match.group(0))
         print("DEBUG: cleanedUp=" + cleaned)
 
-        sendMsg(tn, nerdreply.processRequest(idx, cleaned))
+        resp = nerdreply.processRequest(idx, cleaned)
+        for r in resp.split("\r\n"):
+            sendMsg(tn, r)
 
 if __name__ == '__main__':
     telnetMain()

@@ -128,12 +128,11 @@ class TestBangers(unittest.TestCase):
 
 class Rolloff(unittest.TestCase):
     def test_rolloff(self):
-        # target output: Alex 15 John 6
         output = runHandlers("rolloff Alex John Chris")
         self.assertTrue("Alex" in output)
         numBros = 3
         count = 0
-        for line in output.split("\n")[0:-1]:
+        for line in output.split("\r\n"):
             self.assertTrue(int(line.split(" ")[1]) in range(1, 21))
             count += 1
         self.assertEqual(numBros, count)
