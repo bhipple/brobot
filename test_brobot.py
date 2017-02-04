@@ -17,6 +17,7 @@ import nerdreply
 # import weather
 import re
 import initDatabase
+import rolloff
 
 requiredEnv = ["BANGERS_FILE"
               , "DARKSKYKEY"
@@ -124,6 +125,20 @@ class TestBangers(unittest.TestCase):
     def test_add_redundent(self):
         self.assertEqual("Failed to add banger.",
                 bangers.add_banger('banger add https://www.youtube.com/watch?v=2HQaBWziYvY'))
+
+
+class Rolloff(unittest.TestCase):
+    def test_rolloff(self):
+        # target output: Alex 15 John 6
+        output = rolloff.rollOff("rolloff Alex John Chris")
+        self.assertTrue("Alex" in output)
+        numBros = 3
+        count = 0
+        for line in output.split("\n"):
+            self.assertTrue(int(line.split(" ")[1]) in range(1,21))
+            count += 1
+        self.assertEqual(numBros, count)
+
 
 class TestWeather(unittest.TestCase):
     def test_weather(self):
