@@ -59,6 +59,9 @@ class TestNerdreply(unittest.TestCase):
         self.assertEqual("nerd", runHandlers("I see a Nerd in here"))
         self.assertEqual("nerd", runHandlers("I see a nerd in here"))
 
+    def test_rip(self):
+        self.assertEqual("rip", runHandlers("rip"))
+
     def test_inspiration(self):
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("factory?"))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("factorio?"))
@@ -72,6 +75,17 @@ class TestNerdreply(unittest.TestCase):
         self.assertTrue(i >= 0 and i <= 20)
 
         x = runHandlers("Yo nerdbot drop me a d20")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 20)
+
+    def test_bahp(self):
+        x = runHandlers("bahp")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 20)
+
+        x = runHandlers("Bahp")
         self.assertTrue(isinstance(x, str))
         i = int(x)
         self.assertTrue(i >= 0 and i <= 20)
@@ -92,26 +106,13 @@ class TestBangers(unittest.TestCase):
     def test_override_bangers(self):
         self.assertEqual('brobotDB.sqlite3', bangers.bangersFile())
 
-    def test_d20(self):
-        x = runHandlers("Yo give me a d20")
-        self.assertTrue(isinstance(x, str))
-        i = int(x)
-        self.assertTrue(i >= 0 and i <= 20)
-
-        x = runHandlers("Yo nerdbot drop me a d20")
-        self.assertTrue(isinstance(x, str))
-        i = int(x)
-        self.assertTrue(i >= 0 and i <= 20)
-
     def test_count(self):
-        self.assertTrue("You have" in bangers.count())
+        x = runHandlers("banger count")
+        self.assertTrue("You have" in x)
 
     def test_lookupUserID(self):
         self.assertEqual(5, bangers.lookup_userID("ChrisH"))
         self.assertEqual(8, bangers.lookup_userID("MikeL"))
-
-    def test_getBanger(self):
-        self.assertTrue('youtube' in bangers.select_banger())
 
     def test_getBangerLowercase(self):
         x = runHandlers("Drop a banger")
