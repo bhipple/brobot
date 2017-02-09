@@ -25,13 +25,13 @@ class Handler():
 # it's simpler to just pass the unused message in.
 def handlers():
     return [ Handler(".*[Dd]20.*\r\n", lambda m: str(dice.rollin()))
+           , Handler(".*[Bb]ahp.*\r\n", lambda m: str(dice.rollin()))
            , Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
            , Handler(".*[Dd]ale.*\r\n", lambda m: "daaale")
+           , Handler(".*rip.*\r\n", lambda m: "rip")
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
 
-           # Weather currently disabled due to UTF-8 issues.
-           # , Handler(".*philly*.\r\n", lambda m: weather.philly_weather())
-           # , Handler(".*nyc*.\r\n", lambda m: weather.nyc_weather())
+           # Weather
            , Handler(".*!forecast.*\r\n", lambda m: weather.encoding(m))
 
            # Droppin' bangers
