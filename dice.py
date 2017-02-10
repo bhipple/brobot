@@ -25,8 +25,10 @@ def rollDice(text):
     rolls = [random.randint(1,diceSize) for i in range(numDice)]
     total = sum(rolls)
 
-    return total
+    return total, rolls
 
 
 if __name__ == "__main__":
-    print(rollDice("roll 2d86"))
+    roll = rollDice("d6")
+    print(roll[0])
+    print(roll[1])
