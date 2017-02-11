@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import bangers
+import currency
 import weather
 import sys
 import codecs
@@ -8,10 +9,6 @@ sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
-
-
-# Python2 garbage
-# sys.setdefaultencoding("utf-8")
 
 INSPIRATION = "When you're out there...partying...horswing around...someone out there at the same time is working hard. Someone is getting smarter and someone is winning, just remember that!"
 
@@ -24,7 +21,8 @@ class Handler():
 # business logic. Note that while some functions do not require an argument,
 # it's simpler to just pass the unused message in.
 def handlers():
-    return [ Handler(r"(?i).*d20.*\r\n", lambda m: str(dice.rollin()))
+    return [ Handler(r"(?i).*(bitcoin|to the moon).*\r\n", lambda m: currency.bitcoinValue())
+           , Handler(r"(?i).*d20.*\r\n", lambda m: str(dice.rollin()))
            , Handler(r"(?i).*bahp.*\r\n", lambda m: str(dice.rollin()))
            , Handler(r"(?i).*nerd.*\r\n", lambda m: "nerd")
            , Handler(r"(?i).*dale.*\r\n", lambda m: "daaale")
@@ -40,6 +38,7 @@ def handlers():
            , Handler(".*[Bb]anger help.*\r\n", lambda m: bangers.bangerHelp())
            # Since this is a default, it has to be after the other banger cmds
            , Handler(".*[Bb]anger.*\r\n", lambda m: bangers.selectBanger())
+
            , Handler(".*[Rr]olloff.*\r\n", lambda m: dice.rollOff(m))
            ]
 
