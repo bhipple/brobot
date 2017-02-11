@@ -61,6 +61,7 @@ class TestNerdreply(unittest.TestCase):
 
     def test_rip(self):
         self.assertEqual("rip", runHandlers("rip"))
+        self.assertEqual("rip", runHandlers("RIP"))
 
     def test_inspiration(self):
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("factory?"))
@@ -68,27 +69,22 @@ class TestNerdreply(unittest.TestCase):
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horsing around man!"))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horswing around man!"))
 
-    def test_d20(self):
+    def test_d20_returns_strings(self):
         x = runHandlers("Yo give me a d20")
         self.assertTrue(isinstance(x, str))
-        i = int(x)
-        self.assertTrue(i >= 0 and i <= 20)
 
-        x = runHandlers("Yo nerdbot drop me a d20")
-        self.assertTrue(isinstance(x, str))
-        i = int(x)
-        self.assertTrue(i >= 0 and i <= 20)
+    def test_d20_range(self):
+        i = int(runHandlers("Yo give me a d20"))
+        self.assertTrue(i >= 1 and i <= 20)
+
+    def test_d20_priority(self):
+        i = int(runHandlers("Yo nerdbot drop me a d20"))
+        self.assertTrue(i >= 1 and i <= 20)
 
     def test_bahp(self):
-        x = runHandlers("bahp")
-        self.assertTrue(isinstance(x, str))
-        i = int(x)
-        self.assertTrue(i >= 0 and i <= 20)
-
-        x = runHandlers("Bahp")
-        self.assertTrue(isinstance(x, str))
-        i = int(x)
-        self.assertTrue(i >= 0 and i <= 20)
+        for key in ["bahp", "BAHP", "Bahp!"]:
+            i = int(runHandlers(key))
+            self.assertTrue(i >= 1 and i <= 20)
 
 
 class TestBangers(unittest.TestCase):
@@ -111,8 +107,8 @@ class TestBangers(unittest.TestCase):
         self.assertTrue("You have" in x)
 
     def test_lookupUserID(self):
-        self.assertEqual(5, bangers.lookup_userID("ChrisH"))
-        self.assertEqual(8, bangers.lookup_userID("MikeL"))
+        self.assertEqual(5, bangers.lookupUserId("ChrisH"))
+        self.assertEqual(8, bangers.lookupUserId("MikeL"))
 
     def test_getBangerLowercase(self):
         x = runHandlers("Drop a banger")
@@ -124,7 +120,7 @@ class TestBangers(unittest.TestCase):
 
     def test_add_redundent(self):
         self.assertEqual("Failed to add banger.",
-                bangers.add_banger('banger add https://www.youtube.com/watch?v=2HQaBWziYvY'))
+                bangers.addBanger('banger add https://www.youtube.com/watch?v=2HQaBWziYvY'))
 
 
 class Rolloff(unittest.TestCase):
