@@ -21,7 +21,7 @@ class Handler():
 # business logic. Note that while some functions do not require an argument,
 # it's simpler to just pass the unused message in.
 def handlers():
-    return [ Handler(r"(?i).*(bitcoin|to the moon).*\r\n", lambda m: currency.bitcoinValue())
+    return [ Handler(r"(?i).*(bitcoin|to the moon).*\r\n", lambda m: currency.bitcoinValue(m))
            , Handler(r"(?i).*d20.*\r\n", lambda m: str(dice.rollin()))
            , Handler(r"(?i).*bahp.*\r\n", lambda m: str(dice.rollin()))
            , Handler(r"(?i).*nerd.*\r\n", lambda m: "nerd")
