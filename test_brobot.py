@@ -75,22 +75,16 @@ class TestNerdreply(unittest.TestCase):
 
     def test_d20_range(self):
         i = int(runHandlers("Yo give me a d20"))
-        self.assertTrue(i >= 0 and i <= 20)
+        self.assertTrue(i >= 1 and i <= 20)
 
     def test_d20_priority(self):
         i = int(runHandlers("Yo nerdbot drop me a d20"))
-        self.assertTrue(i >= 0 and i <= 20)
+        self.assertTrue(i >= 1 and i <= 20)
 
     def test_bahp(self):
-        x = runHandlers("bahp")
-        self.assertTrue(isinstance(x, str))
-        i = int(x)
-        self.assertTrue(i >= 0 and i <= 20)
-
-        x = runHandlers("Bahp")
-        self.assertTrue(isinstance(x, str))
-        i = int(x)
-        self.assertTrue(i >= 0 and i <= 20)
+        for key in ["bahp", "BAHP", "Bahp!"]:
+            i = int(runHandlers(key))
+            self.assertTrue(i >= 1 and i <= 20)
 
 
 class TestBangers(unittest.TestCase):
