@@ -7,6 +7,7 @@ with import <nixpkgs> {}; {
                     python27Packages.pep8
                     python27Packages.pylint
                     python27Packages.requests
+                    python27Packages.sqlite3
                   ];
   };
 }
