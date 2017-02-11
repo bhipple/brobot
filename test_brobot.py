@@ -14,7 +14,6 @@ os.environ["LOCIQ"] = "Test"
 import unittest
 import bangers
 import nerdreply
-# import weather
 import re
 import initDatabase
 
@@ -85,6 +84,13 @@ class TestNerdreply(unittest.TestCase):
         for key in ["bahp", "BAHP", "Bahp!"]:
             i = int(runHandlers(key))
             self.assertTrue(i >= 1 and i <= 20)
+
+    def test_bitcoin(self):
+        s = runHandlers("bitcoin plz")
+        self.assertRegexpMatches(s, r"Bitcoin: \$[0-9,]*.[0-9]{2}")
+
+        s = runHandlers("are we going to the mOON nerdbot?")
+        self.assertRegexpMatches(s, r"To the moon! \$[0-9,]*.[0-9]{2}")
 
 
 class TestBangers(unittest.TestCase):
