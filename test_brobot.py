@@ -68,6 +68,10 @@ class TestNerdreply(unittest.TestCase):
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horsing around man!"))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horswing around man!"))
 
+    def test_d20_returns_strings(self):
+        x = runHandlers("Yo give me a d20")
+        self.assertTrue(isinstance(x, str))
+
     def test_d20_range(self):
         i = int(runHandlers("Yo give me a d20"))
         self.assertTrue(i >= 1 and i <= 20)
