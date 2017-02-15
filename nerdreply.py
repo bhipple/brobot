@@ -24,8 +24,8 @@ class Handler():
 # business logic. Note that while some functions do not require an argument,
 # it's simpler to just pass the unused message in.
 def handlers():
-    return [ Handler(".*[Dd]20.*\r\n", lambda m: str(dice.rollin()))
-           , Handler(".*[Bb]ahp.*\r\n", lambda m: str(dice.rollin()))
+    return [ Handler(".*[Bb]ahp.*\r\n", lambda m: str(dice.rollDice("d20")))
+           , Handler(".*[1-9]{0,2}d[1-9]{1,3}.*\r\n", lambda m: str(dice.rollDice(m)))
            , Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
            , Handler(".*[Dd]ale.*\r\n", lambda m: "daaale")
            , Handler(".*rip.*\r\n", lambda m: "rip")
