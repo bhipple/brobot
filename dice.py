@@ -37,3 +37,4 @@ def rollDice(text):
     else:
         res = "Total: " + str(total) + "\r\n" + "Rolls were:" + str(rolls)
         return res
+    return total, rolls
