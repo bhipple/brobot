@@ -97,7 +97,7 @@ class TestNerdreply(unittest.TestCase):
         x = x.split("\r\n")
         self.assertFalse(len(x) == 2)
         i = int(x)
-        self.assertTrue(i >= 1 and i<= 6)
+        self.assertTrue(i >= 1 and i <= 6)
 
     def test_badDiceCalls(self):
         x = runHandlers("Drop 1d0!")
