@@ -22,9 +22,6 @@ class Handler():
 # it's simpler to just pass the unused message in.
 def handlers():
     return [ Handler(".*[1-9]{0,2}d[1-9]{1,3}.*\r\n", lambda m: str(dice.rollDice(m)))
-           , Handler(".*[Nn]erd.*\r\n", lambda m: "nerd")
-           , Handler(".*[Dd]ale.*\r\n", lambda m: "daaale")
-           , Handler(".*rip.*\r\n", lambda m: "rip")
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
            , Handler(r"(?i).*(bitcoin|to the moon).*\r\n", lambda m: currency.bitcoinValue(m))
            , Handler(r"(?i).*bahp.*\r\n", lambda m: str(dice.rollDice("d20")))
