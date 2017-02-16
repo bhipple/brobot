@@ -94,8 +94,6 @@ class TestNerdreply(unittest.TestCase):
 
         # Test that it still realizes this is a single dice
         x = runHandlers("Drop 1d6!")
-        x = x.split("\r\n")
-        self.assertFalse(len(x) == 2)
         i = int(x)
         self.assertTrue(i >= 1 and i <= 6)
 
