@@ -8,7 +8,7 @@ def rollOff(text):
     '''Does a rolloff for the listed bros'''
     rolls = []
     for name in text.split()[1:]:
-        rolls += [(rollin(), name)]
+        rolls += [(rollDice("d20"), name)]
     res = map(lambda (r, p): p + ": " + str(r), sorted(rolls, reverse=True))
     return "\r\n".join(res)
 
