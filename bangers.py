@@ -8,7 +8,7 @@ from initDatabase import createDB
 def bangersFile():
     return os.environ.get('BANGERS_FILE') or '/home/brobot/brobot/brobotDB.sqlite3'
 
-def select_banger():
+def selectBanger():
     '''Returns a random banger from the database'''
     conn = sqlite3.connect(bangersFile())
     cur = conn.cursor()
@@ -17,13 +17,13 @@ def select_banger():
     conn.close()
     return url[0]
 
-def load_bangers():
+def loadBangers():
     '''Loads the bangers from the text file'''
     with open(bangersFile()) as f:
         bangers = [banger.replace('\n', '') for banger in f.readlines()]
     return bangers
 
-def add_banger(text):
+def addBanger(text):
     '''
     Adds a banger to the text file.
     proper input would be "add <link>"
@@ -54,12 +54,12 @@ def loadFromText(textFile):
     with open(textFile) as f:
         for banger in f.readlines():
             try:
-                add_banger('add ' + banger)
+                addBanger('add ' + banger)
             except Exception as e:
                 print(e)
                 print('Banger already added')
 
-def lookup_userID(name):
+def lookupUserId(name):
     '''Looks up the userID from the user which sent a message'''
 
     # normally split in the nerdreply script.
@@ -105,7 +105,7 @@ def count():
     return 'You have ' + str(num_bangers) + ' bangers'
 
 
-def banger_help():
+def bangerHelp():
     '''Gives some quick help info for bangerBot'''
     return 'say something with banger to get a banger.  Say add <link> to add.'
 
@@ -117,12 +117,12 @@ if __name__ == '__main__':
         with open('test_bangers.txt') as f:
             for banger in f.readlines():
                 try:
-                    add_banger('add ' + banger, 5)
+                    addBanger('add ' + banger, 5)
                 except Exception as e:
                     print(e)
                     print('Banger already added')
 
-    print(select_banger())
+    print(selectBanger())
     print(count())
-    print(lookup_userID('match:ChrisHolla!'))
-    print(lookup_userID('match:MikeLevy!'))
+    print(lookupUserId('match:ChrisHolla!'))
+    print(lookupUserId('match:MikeLevy!'))
