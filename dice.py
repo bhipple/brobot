@@ -38,3 +38,6 @@ def rollDice(text):
         res = "Total: " + str(total) + "\r\n" + "Rolls were:" + str(rolls)
         return res
     return total, rolls
+
+if __name__ == "__main__":
+    print(rollDice("1d6"))

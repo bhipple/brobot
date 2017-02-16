@@ -22,4 +22,4 @@ let
 in
 
 # This works, but we can't add non-python packages like the system sqlite to it.
-(pkgs.python27.withPackages (ps: [ps.sqlite3 ps.pyflakes ps.pep8 ps.pylint ps.requests bitcoin-price-api])).env
+(pkgs.python27.withPackages (ps: [ps.pyflakes ps.pep8 ps.pylint ps.requests bitcoin-price-api])).env
