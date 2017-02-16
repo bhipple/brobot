@@ -1,8 +1,9 @@
 with import <nixpkgs> {};
-with pkgs.python27Packages;
 
 let
-  bitcoin-price-api = buildPythonPackage rec {
+  py = pkgs.python27Packages;
+
+  bitcoin-price-api = py.buildPythonPackage rec {
     name = "bitcoin-price-api-${version}";
     version = "0.0.4";
 
@@ -11,8 +12,8 @@ let
       sha256 = "bc68076f9632aaa9a8009d916d67a709c1e045dd904cfc7a3e8be33960d32029";
     };
 
-    buildInputs = with self; [ requests dateutil ];
-    propagatedBuildInputs = with self; [ requests dateutil ];
+    buildInputs = with self; [ py.requests py.dateutil ];
+    propagatedBuildInputs = with self; [ py.requests py.dateutil ];
 
     meta = {
       homepage = "http://github.com/dursk/bitcoin-price-api";
@@ -30,9 +31,9 @@ stdenv.mkDerivation {
   src = ./.;
   buildInputs = [ python
                   bitcoin-price-api
-                  pep8
-                  pyflakes
-                  pylint
-                  sqlite
-                  sqlite3 ];
+                  py.pep8
+                  py.pyflakes
+                  py.pylint
+                  py.sqlite3
+                  sqlite ];
 }
