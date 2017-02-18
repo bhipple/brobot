@@ -111,6 +111,11 @@ class TestNerdreply(unittest.TestCase):
         x = runHandlers("drop 0d5")
         self.assertEqual(x, "No Dice!")
 
+    def test_out_of_range(self):
+        self.assertEqual(runHandlers("Drop 400d6"), None)
+        self.assertEqual(runHandlers("Drop 2d10000"), None)
+        self.assertEqual(runHandlers("Drop 1000d1000"), None)
+
     def test_bahp(self):
         for key in ["bahp", "BAHP", "Bahp!"]:
             i = int(runHandlers(key))
