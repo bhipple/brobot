@@ -1,4 +1,5 @@
-import random import re
+import random 
+import re
 
 def rollin(diceSize):
     return random.randint(1, diceSize)
