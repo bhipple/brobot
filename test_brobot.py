@@ -13,6 +13,7 @@ os.environ["LOCIQ"] = "Test"
 
 import unittest
 import bangers
+import dice
 import nerdreply
 import re
 import initDatabase
@@ -86,6 +87,12 @@ class TestNerdreply(unittest.TestCase):
     def test_d20_priority(self):
         i = int(runHandlers("Yo nerdbot drop me a d20"))
         self.assertTrue(i >= 1 and i <= 20)
+
+    def test_dice_parser(self):
+        self.assertTrue([3, 6], dice.parseDice("roll 3d6 please"))
+        self.assertTrue([2, 20], dice.parseDice("2d20"))
+        self.assertTrue([0, 20], dice.parseDice("0d12"))
+        self.assertTrue([0, 0], dice.parseDice("0d0"))
 
     def test_multiDice(self):
         x = runHandlers("Drop 3d6!")
