@@ -110,7 +110,7 @@ class TestNerdreply(unittest.TestCase):
             self.assertTrue(i >= 1 and i <= 20)
 
     def test_bitcoin(self):
-        s = runHandlers("bitcoin plz")
+        s = runHandlers("bitcoin price plz")
         self.assertRegexpMatches(s, r"Bitcoin: \$[0-9,]*.[0-9]{2}")
 
         s = runHandlers("are we going to the mOON nerdbot?")
