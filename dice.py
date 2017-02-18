@@ -32,14 +32,14 @@ def rollDice(text):
         total = sum(rolls)
 
     # Backwards compatible with old roller
-    if numDice == 1:
-        return total
-    elif numDice == 0 or diceSize == 0:
+    if numDice == 0 or diceSize == 0:
         return "No Dice!"
+    elif numDice == 1:
+        return total
     else:
         res = "Total: " + str(total) + "\r\n" + "Rolls: " + str(rolls)
         return res
     return total, rolls
 
 if __name__ == "__main__":
-    print(rollDice("4d0"))
+    print(rollDice("drop 4d0!"))
