@@ -23,7 +23,7 @@ class Handler():
 def handlers():
     return [ Handler(".*[1-9]{0,2}d[1-9]{1,3}.*\r\n", lambda m: str(dice.rollDice(m)))
            , Handler(".*(horsw?ing around|factor[iy]).*\r\n", lambda m: INSPIRATION)
-           , Handler(r"(?i).*(bitcoin|to the moon).*\r\n", lambda m: currency.bitcoinValue(m))
+           , Handler(r"(?i).*(bitcoin price|to the moon).*\r\n", lambda m: currency.bitcoinValue(m))
            , Handler(r"(?i).*bahp.*\r\n", lambda m: str(dice.rollDice("d20")))
            , Handler(r"(?i).*nerd.*\r\n", lambda m: "nerd")
            , Handler(r"(?i).*dale.*\r\n", lambda m: "daaale")

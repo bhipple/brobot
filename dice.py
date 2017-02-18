@@ -8,7 +8,7 @@ def rollOff(text):
     '''Does a rolloff for the listed bros'''
     rolls = []
     for name in text.split()[1:]:
-        rolls += [(rollDice("d20"), name)]
+        rolls += [(rollin(20), name)]
     res = map(lambda (r, p): p + ": " + str(r), sorted(rolls, reverse=True))
     return "\r\n".join(res)
 
@@ -35,6 +35,6 @@ def rollDice(text):
     elif numDice == 0:
         return "No Dice!"
     else:
-        res = "Total: " + str(total) + "\r\n" + "Rolls were:" + str(rolls)
+        res = "Total: " + str(total) + "\r\n" + "Rolls: " + str(rolls)
         return res
     return total, rolls
