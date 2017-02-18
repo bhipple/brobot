@@ -15,7 +15,7 @@ def rollOff(text):
 
 def rollDice(text):
     """matches xdy from input text and rolls that x dice of y size"""
-    match = re.findall("[0-9]{0,50}d[1-9]{1,50}", text)
+    match = re.findall("[0-9]{0,50}d[0-9]{1,50}", text)
     # poor man's regex without matchgroups
 
     split = match[0].split("d")
@@ -24,17 +24,22 @@ def rollDice(text):
         numDice = int(split[0])
     except:
         numDice = 1
+
     diceSize = int(split[1])
 
-    rolls = [rollin(diceSize) for i in range(numDice)]
-    total = sum(rolls)
+    if diceSize != 0:
+        rolls = [rollin(diceSize) for i in range(numDice)]
+        total = sum(rolls)
 
     # Backwards compatible with old roller
     if numDice == 1:
         return total
-    elif numDice == 0:
+    elif numDice == 0 or diceSize == 0:
         return "No Dice!"
     else:
         res = "Total: " + str(total) + "\r\n" + "Rolls: " + str(rolls)
         return res
     return total, rolls
+
+if __name__ == "__main__":
+    print(rollDice("4d0"))

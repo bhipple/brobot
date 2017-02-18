@@ -99,11 +99,11 @@ class TestNerdreply(unittest.TestCase):
 
     def test_badDiceCalls(self):
         x = runHandlers("Drop 1d0!")
-        self.assertEqual(x, None)
-
-        x = runHandlers("drop 0d5")
         self.assertEqual(x, "No Dice!")
 
+        x = runHandlers("drop 0d5")
+
+        self.assertEqual(x, "No Dice!")
     def test_bahp(self):
         for key in ["bahp", "BAHP", "Bahp!"]:
             i = int(runHandlers(key))
