@@ -37,8 +37,9 @@ def rollDice(text):
     elif numDice == 1:
         return total
     else:
-        res = "Total: " + str(total) + "\r\n" + "Rolls: " + str(rolls)
-        return res
+        r = "Rolls: " + str(rolls)
+        t = "Total: " + str(total)
+        return r + "\r\n" + t
     return total, rolls
 
 if __name__ == "__main__":
