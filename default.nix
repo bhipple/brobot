@@ -1,7 +1,9 @@
 with import <nixpkgs> {};
 
 let
-  bitcoin-price-api = pkgs.python27Packages.buildPythonPackage rec {
+  py = pkgs.python27Packages;
+
+  bitcoin-price-api = py.buildPythonPackage rec {
     name = "bitcoin-price-api-${version}";
     version = "0.0.4";
 
@@ -10,8 +12,8 @@ let
       sha256 = "bc68076f9632aaa9a8009d916d67a709c1e045dd904cfc7a3e8be33960d32029";
     };
 
-    buildInputs = with self; with pkgs.python27Packages; [ requests dateutil ];
-    propagatedBuildInputs = with self; with pkgs.python27Packages; [ requests dateutil ];
+    buildInputs = with self; [ py.requests py.dateutil ];
+    propagatedBuildInputs = with self; [ py.requests py.dateutil ];
 
     meta = {
       homepage = "http://github.com/dursk/bitcoin-price-api";
@@ -21,5 +23,17 @@ let
   };
 in
 
-# This works, but we can't add non-python packages like the system sqlite to it.
-(pkgs.python27.withPackages (ps: [ps.sqlite3 ps.pyflakes ps.pep8 ps.pylint ps.requests bitcoin-price-api])).env
+{ stdenv ? pkgs.stdenv }:
+
+stdenv.mkDerivation {
+  name = "brobot";
+  version = "0.1.0.0";
+  src = ./.;
+  buildInputs = [ python
+                  bitcoin-price-api
+                  py.pep8
+                  py.pyflakes
+                  py.pylint
+                  py.sqlite3
+                  sqlite ];
+}
