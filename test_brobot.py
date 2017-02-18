@@ -90,7 +90,7 @@ class TestNerdreply(unittest.TestCase):
 
     def test_dice_parser(self):
         self.assertEqual((3, 6), dice.parseDice("roll 3d6 please"))
-        self.assertEqual((2, 20), dice.parseDice("2d20"))
+        self.assertEqual((2, 20), dice.parseDice("2d20!"))
         self.assertEqual((0, 12), dice.parseDice("0d12"))
         self.assertEqual((0, 0), dice.parseDice("0d0"))
 
