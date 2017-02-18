@@ -90,7 +90,7 @@ class TestNerdreply(unittest.TestCase):
 
     def test_dice_parser(self):
         self.assertEqual((3, 6), dice.parseDice("roll 3d6 please"))
-        self.assertEqual((2, 20), dice.parseDice("2d20"))
+        self.assertEqual((2, 20), dice.parseDice("2d20!"))
         self.assertEqual((0, 12), dice.parseDice("0d12"))
         self.assertEqual((0, 0), dice.parseDice("0d0"))
 
@@ -110,6 +110,11 @@ class TestNerdreply(unittest.TestCase):
 
         x = runHandlers("drop 0d5")
         self.assertEqual(x, "No Dice!")
+
+    def test_out_of_range(self):
+        self.assertEqual(runHandlers("Drop 400d6"), None)
+        self.assertEqual(runHandlers("Drop 2d10000"), None)
+        self.assertEqual(runHandlers("Drop 1000d1000"), None)
 
     def test_bahp(self):
         for key in ["bahp", "BAHP", "Bahp!"]:
