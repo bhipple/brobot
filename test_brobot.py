@@ -16,6 +16,8 @@ import bangers
 import nerdreply
 import re
 import initDatabase
+import random
+random.seed(100)
 
 requiredEnv = ["BANGERS_FILE"
               , "DARKSKYKEY"
@@ -68,9 +70,14 @@ class TestNerdreply(unittest.TestCase):
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horsing around man!"))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horswing around man!"))
 
-    def test_d20_returns_strings(self):
+    def test_singleDice(self):
         x = runHandlers("Yo give me a d20")
         self.assertTrue(isinstance(x, str))
+
+        x = runHandlers("Yo nerdbot drop me a d10")
+        self.assertTrue(isinstance(x, str))
+        i = int(x)
+        self.assertTrue(i >= 0 and i <= 10)
 
     def test_d20_range(self):
         i = int(runHandlers("Yo give me a d20"))
@@ -79,6 +86,23 @@ class TestNerdreply(unittest.TestCase):
     def test_d20_priority(self):
         i = int(runHandlers("Yo nerdbot drop me a d20"))
         self.assertTrue(i >= 1 and i <= 20)
+
+    def test_multiDice(self):
+        x = runHandlers("Drop 3d6!")
+        x = x.split("\r\n")
+        self.assertTrue(len(x) == 2)
+
+        # Test that it still realizes this is a single dice
+        x = runHandlers("Drop 1d6!")
+        i = int(x)
+        self.assertTrue(i >= 1 and i <= 6)
+
+    def test_badDiceCalls(self):
+        x = runHandlers("Drop 1d0!")
+        self.assertEqual(x, None)
+
+        x = runHandlers("drop 0d5")
+        self.assertEqual(x, "No Dice!")
 
     def test_bahp(self):
         for key in ["bahp", "BAHP", "Bahp!"]:
