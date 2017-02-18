@@ -1,8 +1,7 @@
-import random
-import re
+import random import re
 
-def rollin():
-    return random.randint(1, 20)
+def rollin(diceSize):
+    return random.randint(1, diceSize)
 
 def rollOff(text):
     '''Does a rolloff for the listed bros'''
@@ -26,7 +25,7 @@ def rollDice(text):
         numDice = 1
     diceSize = int(split[1])
 
-    rolls = [random.randint(1, diceSize) for i in range(numDice)]
+    rolls = [rollin(diceSize) for i in range(numDice)]
     total = sum(rolls)
 
     # Backwards compatible with old roller
