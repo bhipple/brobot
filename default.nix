@@ -14,5 +14,6 @@ stdenv.mkDerivation {
                   py.pep8
                   py.pyflakes
                   py.pylint
+                  py.yapf
                   sqlite ];
 }
