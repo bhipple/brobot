@@ -1,7 +1,8 @@
 import sqlite3
 
 Names = ['Adam', 'Alex', 'Austin', 'Ben', 'Chris B.', 'Chris H.', 'Jim',
-        'John', 'Mike', 'Sean', 'Zach', 'Guest']
+         'John', 'Mike', 'Sean', 'Zach', 'Guest']
+
 
 def createDB():
     '''Creates the Database, the tables, and fills in the user information.'''

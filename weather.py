@@ -4,7 +4,6 @@ import os
 import re
 import requests
 
-
 dskey = os.environ["DARKSKYKEY"]
 lociq = os.environ["LOCIQ"]
 locurl = "http://locationiq.org/v1/search.php?key="
@@ -17,6 +16,7 @@ def encoding(text):
     json = weather(text).encode('utf-8')
     return json
 
+
 def just_coord(text):
     text = re.findall(r'"([^"]*)"', text)
     text = str(text)
@@ -25,6 +25,7 @@ def just_coord(text):
     parsed_json = json.loads(r.text)
     for i in parsed_json:
         return i['lat'] + ',' + i['lon']
+
 
 def weather(text):
     try:

@@ -5,8 +5,11 @@ import sqlite3
 from string import ascii_uppercase
 from initDatabase import createDB
 
+
 def bangersFile():
-    return os.environ.get('BANGERS_FILE') or '/home/brobot/brobot/brobotDB.sqlite3'
+    return os.environ.get(
+        'BANGERS_FILE') or '/home/brobot/brobot/brobotDB.sqlite3'
+
 
 def selectBanger():
     '''Returns a random banger from the database'''
@@ -17,11 +20,13 @@ def selectBanger():
     conn.close()
     return url[0]
 
+
 def loadBangers():
     '''Loads the bangers from the text file'''
     with open(bangersFile()) as f:
         bangers = [banger.replace('\n', '') for banger in f.readlines()]
     return bangers
+
 
 def addBanger(text):
     '''
@@ -37,17 +42,16 @@ def addBanger(text):
 
     try:
         cur.execute("INSERT INTO Bangers VALUES (?, ?, ?, ?, ?)", [
-                    text,
-                    'Title Placeholder',
-                    random.randint(0, 10),
-                    datetime.datetime.now(),
-                    0])
+            text, 'Title Placeholder', random.randint(0, 10),
+            datetime.datetime.now(), 0
+        ])
 
         conn.commit()
         conn.close()
     except:
         return "Failed to add banger."
     return 'Successfully added banger'
+
 
 def loadFromText(textFile):
     '''Loads the list of bangers from the old text file.'''
@@ -58,6 +62,7 @@ def loadFromText(textFile):
             except Exception as e:
                 print(e)
                 print('Banger already added')
+
 
 def lookupUserId(name):
     '''Looks up the userID from the user which sent a message'''
@@ -86,7 +91,7 @@ def lookupUserId(name):
     conn = sqlite3.connect(bangersFile())
     cur = conn.cursor()
 
-    cur.execute('SELECT UserID FROM Users WHERE Name = ?', (name,))
+    cur.execute('SELECT UserID FROM Users WHERE Name = ?', (name, ))
     userID = cur.fetchone()[0]
 
     if userID is None:
