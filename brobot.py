@@ -22,8 +22,10 @@ def sendMsg(tn, msg):
     print("DEBUG: Sending msg=" + msg)
     tn.write(("PRIVMSG " + fbchan + " :" + msg + "\n").encode('utf-8'))
 
+
 def cleanup(msg):
     return msg.split("PRIVMSG " + fbchan + " :")[1]
+
 
 def telnetMain():
     print("DEBUG: Opening telnet handle")
@@ -55,6 +57,7 @@ def telnetMain():
         resp = nerdreply.processRequest(idx, cleaned)
         for r in resp.split("\r\n"):
             sendMsg(tn, r)
+
 
 if __name__ == '__main__':
     telnetMain()

@@ -20,22 +20,18 @@ import initDatabase
 import random
 random.seed(100)
 
-requiredEnv = ["BANGERS_FILE"
-              , "DARKSKYKEY"
-              , "FBCHAN"
-              , "IRCPASSWORD"
-              , "LOCIQ"
-              , "NICKNAME"
-              , "REALNAME"
-              , "USER"
-              ]
+requiredEnv = ["BANGERS_FILE", "DARKSKYKEY", "FBCHAN", "IRCPASSWORD", "LOCIQ",
+               "NICKNAME", "REALNAME", "USER"]
+
 
 def setDefaultEnv(k):
     os.environ[k] = os.getenv(k, "Test")
 
+
 def initEnv():
     os.environ["BANGERS_FILE"] = "brobotDB.sqlite3"
     map(setDefaultEnv, requiredEnv)
+
 
 initEnv()
 
@@ -46,14 +42,15 @@ sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 # Helper function to run all handlers in order against an input msg
 # Behaves identically to how the telnet listener will behave.
 
+
 def runHandlers(msg, hndlrs=nerdreply.handlers()):
     msg += "\r\n"
     for h in hndlrs:
         if re.match(h.regex, msg):
             return h.func(msg)
 
-class TestNerdreply(unittest.TestCase):
 
+class TestNerdreply(unittest.TestCase):
     def test_none(self):
         self.assertEqual(None, runHandlers("This does not match anything."))
 
@@ -68,8 +65,10 @@ class TestNerdreply(unittest.TestCase):
     def test_inspiration(self):
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("factory?"))
         self.assertEqual(nerdreply.INSPIRATION, runHandlers("factorio?"))
-        self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horsing around man!"))
-        self.assertEqual(nerdreply.INSPIRATION, runHandlers("Stop horswing around man!"))
+        self.assertEqual(nerdreply.INSPIRATION,
+                         runHandlers("Stop horsing around man!"))
+        self.assertEqual(nerdreply.INSPIRATION,
+                         runHandlers("Stop horswing around man!"))
 
     def test_singleDice(self):
         x = runHandlers("Yo give me a d20")
@@ -138,7 +137,8 @@ class TestBangers(unittest.TestCase):
 
     def test_default_bangers_file(self):
         os.environ['BANGERS_FILE'] = ''
-        self.assertEqual('/home/brobot/brobot/brobotDB.sqlite3', bangers.bangersFile())
+        self.assertEqual('/home/brobot/brobot/brobotDB.sqlite3',
+                         bangers.bangersFile())
         os.environ['BANGERS_FILE'] = 'brobotDB.sqlite3'
 
     def test_override_bangers(self):
@@ -161,8 +161,8 @@ class TestBangers(unittest.TestCase):
         self.assertTrue("youtube" in x)
 
     def test_add_redundent(self):
-        self.assertEqual("Failed to add banger.",
-                bangers.addBanger('banger add https://www.youtube.com/watch?v=2HQaBWziYvY'))
+        self.assertEqual("Failed to add banger.", bangers.addBanger(
+            'banger add https://www.youtube.com/watch?v=2HQaBWziYvY'))
 
 
 class Rolloff(unittest.TestCase):
@@ -180,7 +180,8 @@ class Rolloff(unittest.TestCase):
 class TestWeather(unittest.TestCase):
     def test_weather(self):
         if os.environ["DARKSKYKEY"] == "Test" or os.environ["LOCIQ"] == "Test":
-            print("Export a valid DARKSKYKEY and LOCIQ in order to run the weather tests.")
+            print(
+                "Export a valid DARKSKYKEY and LOCIQ in order to run the weather tests.")
             return
 
             print(runHandlers('!forecast "new york, ny"'))

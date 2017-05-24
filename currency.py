@@ -2,6 +2,7 @@
 from exchanges.bitfinex import Bitfinex
 import re
 
+
 def bitcoinValue(msg):
     val = Bitfinex().get_current_price()
     formattedVal = "$" + "{:,.2f}".format(val)

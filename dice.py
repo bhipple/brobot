@@ -1,8 +1,10 @@
 import random
 import re
 
+
 def rollin(diceSize):
     return random.randint(1, diceSize)
+
 
 def rollOff(text):
     '''Does a rolloff for the listed bros'''
@@ -11,6 +13,7 @@ def rollOff(text):
         rolls += [(rollin(20), name)]
     res = map(lambda (r, p): p + ": " + str(r), sorted(rolls, reverse=True))
     return "\r\n".join(res)
+
 
 def parseDice(text):
     """matches xdy from input text and rolls that x dice of y size"""
@@ -26,6 +29,7 @@ def parseDice(text):
 
     diceSize = int(split[1])
     return numDice, diceSize
+
 
 def rollDice(text):
     numDice, diceSize = parseDice(text)
